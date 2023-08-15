@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+        <com.example.myapp.view.CustomViewPager
+            android:id="@+id/view_page"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <com.flyco.tablayout.CommonTabLayout
+            android:id="@+id/common_tab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tl_textsize="13sp"
+            app:tl_textSelectColor="#0025ff"
+            app:tl_textUnselectColor="@color/black"/>
+
+</LinearLayout>

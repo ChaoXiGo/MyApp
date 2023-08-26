@@ -24,7 +24,7 @@ class MainActivity : BaseActivity(), View.OnClickListener {
     }
 
     override fun initData() {
-
+      
     }
 
     override fun onClick(p0: View?) {

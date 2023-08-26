@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
 import com.example.myapp.adapter.VideoAdapter
+import com.example.myapp.entity.DataBean
 import com.example.myapp.entity.VideoUser
 
 class VideoFragment : BaseFragment() {
@@ -35,4 +36,8 @@ class VideoFragment : BaseFragment() {
         // 设置适配器给recyclerView
         recyclerView.adapter = VideoAdapter(requireContext(), videoUsers)
     }
+
+    /* fun getListInfo():List<DataBean>{
+
+    } */
 }

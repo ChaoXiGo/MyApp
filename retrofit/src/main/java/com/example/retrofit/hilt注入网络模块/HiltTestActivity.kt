@@ -16,7 +16,6 @@ class HiltTestActivity : AppCompatActivity() {
 
     lateinit var apiService:ApiService
     private val TAG = "HiltTestActivity"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hilt_test)
@@ -30,7 +29,6 @@ class HiltTestActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<String>, t: Throwable) {
                     TODO("Not yet implemented")
                 }
-
             }
         )
     }

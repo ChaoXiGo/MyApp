@@ -75,7 +75,8 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
                     SharedPreferencesUtil.saveString(this@LoginActivity,"token",token)
                     SharedPreferencesUtil.saveString(this@LoginActivity,"account",account)
                     SharedPreferencesUtil.saveString(this@LoginActivity,"password",password)
-                    Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
+                    val currentToken = SharedPreferencesUtil.getString(this@LoginActivity, "token", "")
+                    Toast.makeText(this@LoginActivity, "登录成功$currentToken", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this@LoginActivity,HomeActivity::class.java))
                 }else{
                     Log.d(TAG, "onFailure: 登录失败")

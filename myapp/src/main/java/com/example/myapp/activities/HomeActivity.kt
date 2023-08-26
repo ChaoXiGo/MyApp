@@ -42,7 +42,7 @@ class HomeActivity : BaseActivity(), OnTabSelectListener, ViewPager.OnPageChange
     override fun initView() {
         viewPage = findViewById(R.id.view_page)
         commonTabLayout = findViewById(R.id.common_tab)
-
+        println("修改了")
     }
 
     override fun initData() {

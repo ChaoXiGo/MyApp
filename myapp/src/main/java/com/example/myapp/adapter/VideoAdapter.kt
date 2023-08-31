@@ -4,16 +4,22 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
-import com.example.myapp.entity.VideoUser
-import kotlin.Int
+import com.example.myapp.entity.VideoEntity
+import com.squareup.picasso.Picasso
 
-class VideoAdapter(_context: Context, _info: List<VideoUser>) :
+class VideoAdapter(context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private val mContext = _context
-    private val mInfo = _info
+    private val mContext = context
+    private lateinit var mInfo: List<VideoEntity>
+
+    fun setInfo(info: List<VideoEntity>) {
+        mInfo = info
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view =
             LayoutInflater.from(mContext).inflate(R.layout.item_video_layout, parent, false)
@@ -21,26 +27,39 @@ class VideoAdapter(_context: Context, _info: List<VideoUser>) :
     }
 
     override fun getItemCount(): Int {
-        return mInfo.size
+        return if (mInfo.isNotEmpty()) mInfo.size else 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val videoUser = mInfo[position]
         val viewHolder = holder as ViewHolder
-        viewHolder.id.text = videoUser.id.toString()
-        viewHolder.username.text = videoUser.username
-        viewHolder.password.text = videoUser.password
+        val videoEntity = mInfo[position]
+        viewHolder.tvTitle.text = videoEntity.vtitle
+        viewHolder.tvAuthor.text = videoEntity.author
+        viewHolder.tvDz.text = videoEntity.likeNum.toString()
+        viewHolder.tvComment.text = videoEntity.commentNum.toString()
+        viewHolder.tvCollect.text = videoEntity.collectNum.toString()
+
+        Picasso.with(mContext).load(videoEntity.headurl).into(viewHolder.img_header)
+        Picasso.with(mContext).load(videoEntity.coverurl).into(viewHolder.img_cover)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-         val id: TextView
-         val username: TextView
-         val password: TextView
+        var tvTitle: TextView
+        var tvAuthor: TextView
+        var tvDz: TextView
+        var tvComment: TextView
+        var tvCollect: TextView
+        var img_header: ImageView
+        var img_cover: ImageView
 
         init {
-            id = itemView.findViewById(R.id.id)
-            username = itemView.findViewById(R.id.username)
-            password = itemView.findViewById(R.id.password)
+            tvTitle = itemView.findViewById(R.id.title)
+            tvAuthor = itemView.findViewById(R.id.author)
+            tvDz = itemView.findViewById(R.id.dz)
+            tvComment = itemView.findViewById(R.id.comment)
+            tvCollect = itemView.findViewById(R.id.collect)
+            img_header = itemView.findViewById(R.id.img_header)
+            img_cover = itemView.findViewById(R.id.img_cover)
         }
     }
 

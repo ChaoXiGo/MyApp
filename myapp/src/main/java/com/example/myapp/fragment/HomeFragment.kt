@@ -1,52 +1,69 @@
 package com.example.myapp.fragment
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
-import com.example.myapp.R
 import com.example.myapp.adapter.HomeAdapter
-import com.flyco.tablayout.SlidingTabLayout
+import com.example.myapp.api.Api
+import com.example.myapp.api.CallBack
+import com.example.myapp.databinding.FragmentHomeBinding
+import com.example.myapp.entity.CategoryEntity
+import com.example.myapp.entity.VideoCategoryEntity
+import com.example.myapp.entity.VideoListEntity
+import com.google.gson.Gson
 
-class HomeFragment : BaseFragment() {
-
-    var mFragments: ArrayList<Fragment> = ArrayList()
-    lateinit var homeAdapter: HomeAdapter
-
-    lateinit var viewPager: ViewPager
-    lateinit var slidingTabLayout: SlidingTabLayout
-
-    override fun initLayout(): Int {
-        return R.layout.fragment_home
-    }
-
-    override fun initView() {
-        viewPager = mView.findViewById(R.id.vp1)
-        slidingTabLayout = mView.findViewById(R.id.SlidingTabLayout)
-    }
-
-    override fun initData() {
-        val mTitles = arrayOf(
-            "热门", "iOS", "Android", "前端", "后端", "设计", "工具资源"
-        )
-        for (i in mTitles.indices) {
-            mFragments.add(VideoFragment.instance())
-
-        }
-        homeAdapter = HomeAdapter(parentFragmentManager,mTitles,mFragments)
-        viewPager.offscreenPageLimit = mFragments.size
-        viewPager.adapter = homeAdapter
-
-        slidingTabLayout.setViewPager(viewPager)
-    }
-
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            HomeFragment().apply {
-
-            }
+            HomeFragment().apply {}
     }
+
+    var mFragments: ArrayList<Fragment> = ArrayList()
+    lateinit var homeAdapter: HomeAdapter
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
+    }
+
+    override fun initData() {
+
+        getVideoCategoryList()
+
+
+    }
+
+    lateinit var mTitles: Array<String>
+    private fun getVideoCategoryList() {
+        Api.config("app/videocategory/list", hashMapOf()).getRequest(context, object : CallBack {
+            override fun onSuccess(res: String) {
+                activity?.runOnUiThread {
+                    kotlin.run {
+                        val response = Gson().fromJson(res, VideoCategoryEntity::class.java)
+                        if (response != null && response.code == 1) {
+                            val list = response.data
+                            if (list != null && list.size > 0) {
+                                // 初始化字符串数组
+                                mTitles = Array(list.size) { "" }
+                                for (i in 0 until list.size) {
+                                    mTitles[i] = list[i].categoryName
+                                    mFragments.add(VideoFragment.instance(list[i].categoryId))
+                                }
+                            }
+                            vb.vp1.offscreenPageLimit = mFragments.size
+                            // 每个tab为一个fragment
+                            vb.vp1.adapter = HomeAdapter(parentFragmentManager, mTitles, mFragments)
+                            vb.SlidingTabLayout.setViewPager(vb.vp1)
+                        }
+                    }
+                }
+            }
+            override fun onFailure(t: Throwable) {
+            }
+        })
+    }
+
+
 }

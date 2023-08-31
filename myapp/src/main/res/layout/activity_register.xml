@@ -25,12 +25,12 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/et_username"
+                android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:background="@null"
-                android:hint="注册账户" />
+                android:hint="输入账户" />
 
         </LinearLayout>
 
@@ -52,12 +52,12 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="center"
-                android:hint="注册密码" />
+                android:hint="用户密码" />
 
         </LinearLayout>
         <View
@@ -68,10 +68,9 @@
         <Button
             android:id="@+id/btn_register"
             android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:text="@string/Register" />
-
     </LinearLayout>
 </RelativeLayout>

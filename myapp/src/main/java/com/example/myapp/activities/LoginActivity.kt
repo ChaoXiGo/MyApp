@@ -3,93 +3,60 @@ package com.example.myapp.activities
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
-import com.example.myapp.R
-import com.example.myapp.entity.LoginRequest
-import com.example.myapp.entity.User
-import com.example.myapp.utils.RetrofitUtil
-import com.example.myapp.utils.SharedPreferencesUtil
-import io.reactivex.rxjava3.functions.Consumer
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.myapp.api.Api
+import com.example.myapp.api.CallBack
+import com.example.myapp.databinding.ActivityLoginBinding
+import com.example.myapp.entity.LoginResponse
+import com.google.gson.Gson
 
-
-class LoginActivity : BaseActivity(), View.OnClickListener {
-
+class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val TAG = "LoginActivity"
-    lateinit var et_username: TextView
-    lateinit var et_password: TextView
-    lateinit var btnLogin: Button
-    override fun initLayout(): Int {
-        return R.layout.activity_login
-    }
-
-    override fun initView() {
-        btnLogin = findViewById(R.id.btn_login)
-        et_username = findViewById(R.id.et_username)
-        et_password = findViewById(R.id.et_password)
+    override fun initBinding(): ActivityLoginBinding {
+        return ActivityLoginBinding.inflate(layoutInflater)
     }
 
     override fun initData() {
-        btnLogin.setOnClickListener(this)
-
-    }
-
-    @SuppressLint("CheckResult")
-    override fun onClick(p0: View?) {
-        when (p0?.id) {
-            R.id.btn_login -> {
-                login()
-            }
+        vb.btnLogin.setOnClickListener {
+            val account = vb.etUsername.text.trim().toString()
+            val password = vb.etPassword.text.trim().toString()
+            login(account, password)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        val account = SharedPreferencesUtil.getString(this, "account", "")
-        val password = SharedPreferencesUtil.getString(this, "password", "")
-        et_username.text = account
-        et_password.text = password
+        val mobile = getString("mobile")
+        val password = getString("password")
+        vb.etUsername.setText(mobile)
+        vb.etPassword.setText(password)
     }
 
     @SuppressLint("CheckResult")
-    fun login() {
-        val account = et_username.text.trim().toString()
-        val password = et_password.text.trim().toString()
+    fun login(account: String, password: String) {
         if (account.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this@LoginActivity, "信息不能为空", Toast.LENGTH_SHORT).show()
+            showToast("信息不能为空")
             return
         }
-        val call =
-            RetrofitUtil.apiService().loginUser(LoginRequest(account, password))
-        call.enqueue(object : Callback<User> {
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                val user = response.body()
-                if (user?.code == 1){
-                    Log.d(TAG, "onResponse: $user")
-                    val token = user.data.token
-                    SharedPreferencesUtil.saveString(this@LoginActivity,"token",token)
-                    SharedPreferencesUtil.saveString(this@LoginActivity,"account",account)
-                    SharedPreferencesUtil.saveString(this@LoginActivity,"password",password)
-                    val currentToken = SharedPreferencesUtil.getString(this@LoginActivity, "token", "")
-                    Toast.makeText(this@LoginActivity, "登录成功$currentToken", Toast.LENGTH_SHORT).show()
+        val params = HashMap<String, Any>()
+        params["mobile"] = account
+        params["password"] = password
+        Api.config("app/login", params as Map<String, Any>?).postRequest(this@LoginActivity,object :CallBack{
+            override fun onSuccess(res: String) {
+                val gson = Gson()
+                val user = gson.fromJson(res, LoginResponse::class.java)
+                if (user.code == 1){
+                    saveToSp("mobile",account)
+                    saveToSp("password",password)
+                    saveToSp("expire",user.data.expire)
+                    saveToSp("token",user.data.token)
                     startActivity(Intent(this@LoginActivity,HomeActivity::class.java))
-                }else{
-                    Log.d(TAG, "onFailure: 登录失败")
+                    showToastSync("登录成功")
                 }
-
             }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-
+            override fun onFailure(t: Throwable) {
+                TODO("Not yet implemented")
             }
-
         })
-
     }
-
 }

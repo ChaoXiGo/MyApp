@@ -46,6 +46,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         vb.btnRegister.setOnClickListener{
             navigateTo(RegisterActivity::class.java)
         }
+
+        vb.exampleGrayOnGreen.onSlideToActAnimationEventListener
     }
 
     override fun onResume() {
@@ -81,7 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             }
 
             override fun onFailure(t: Throwable) {
-                TODO("Not yet implemented")
+                showToastSync("网络连接错误")
             }
         })
     }

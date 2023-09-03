@@ -38,10 +38,10 @@
         android:paddingRight="16dp"
         android:paddingBottom="12dp">
 
-       <!-- <com.amap.api.maps.MapView
+        <com.amap.api.maps.MapView
             android:id="@+id/map"
             android:layout_width="match_parent"
-            android:layout_height="300dp" />-->
+            android:layout_height="300dp" />
 
 
         <com.google.android.material.tabs.TabLayout
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="取货" />
 
-            <!--<com.xw.repo.BubbleSeekBar
+           <!-- <com.xw.repo.BubbleSeekBar
                 android:id="@+id/seek_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

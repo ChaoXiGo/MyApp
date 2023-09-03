@@ -93,21 +93,22 @@
         android:paddingLeft="32dp"
         android:paddingRight="32dp">
 
-       <!-- <com.ncorti.slidetoact.SlideToActView
+        <com.ncorti.slidetoact.SlideToActView
             android:id="@+id/example_gray_on_green"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="6dp"
-            app:area_margin="4dp"
+            android:elevation="20dp"
             app:animation_duration="250"
-            app:outer_color="@color/green"
-            app:inner_color="@color/grey"
-            app:border_radius="2dp"
-            app:text="Testing all the custom attributes"
-            app:text_size="12sp"
-            app:slider_height="80dp"
+            app:icon_margin="1dp"
+            app:outer_color="#000E9A4D"
+            app:inner_color="#000E9A4D"
+            app:slider_height="60dp"
+            app:slider_icon="@drawable/ic_phone"
+            app:slider_icon_color="#10ED2D"
             app:slider_locked="false"
-            app:bounce_on_start="true" />-->
+            app:text="起                          飛"
+            app:text_color="#00FFFEFE"
+            app:text_size="18sp" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

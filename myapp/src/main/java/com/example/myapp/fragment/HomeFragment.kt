@@ -4,12 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapp.adapter.HomeAdapter
-import com.example.myapp.api.Api
+import com.example.myapp.api.OkApi
+import com.example.myapp.api.ApiConfig.VIDEO_CATEGORY_LIST
 import com.example.myapp.api.CallBack
 import com.example.myapp.databinding.FragmentHomeBinding
-import com.example.myapp.entity.CategoryEntity
 import com.example.myapp.entity.VideoCategoryEntity
-import com.example.myapp.entity.VideoListEntity
 import com.google.gson.Gson
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -20,7 +19,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     var mFragments: ArrayList<Fragment> = ArrayList()
-    lateinit var homeAdapter: HomeAdapter
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -32,12 +30,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
         getVideoCategoryList()
 
-
     }
 
     lateinit var mTitles: Array<String>
     private fun getVideoCategoryList() {
-        Api.config("app/videocategory/list", hashMapOf()).getRequest(context, object : CallBack {
+        OkApi.config(VIDEO_CATEGORY_LIST, hashMapOf()).getRequest(context, object : CallBack {
             override fun onSuccess(res: String) {
                 activity?.runOnUiThread {
                     kotlin.run {

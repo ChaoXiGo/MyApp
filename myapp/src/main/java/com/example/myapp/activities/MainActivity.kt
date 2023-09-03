@@ -12,8 +12,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), View.OnClickListener {
     }
 
     override fun initData() {
-        vb.btnLogin.setOnClickListener(this)
-        vb.btnRegister.setOnClickListener(this)
     }
 
     override fun onClick(p0: View?) {

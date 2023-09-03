@@ -2,8 +2,12 @@ package com.example.myapp.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import com.example.myapp.api.Api
+import android.view.View
+import com.example.myapp.api.OkApi
+import com.example.myapp.api.ApiConfig.LOGIN
 import com.example.myapp.api.CallBack
 import com.example.myapp.databinding.ActivityLoginBinding
 import com.example.myapp.entity.LoginResponse
@@ -16,10 +20,31 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun initData() {
-        vb.btnLogin.setOnClickListener {
-            val account = vb.etUsername.text.trim().toString()
+        initListen()
+    }
+
+    private fun initListen(){
+        vb.btnLogin.setOnClickListener{
+            val mobile = vb.etUsername.text.trim().toString()
             val password = vb.etPassword.text.trim().toString()
-            login(account, password)
+            login(mobile,password)
+        }
+        vb.etUsername.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val length = vb.etUsername.text.toString().trim().length
+                if (length > 8 || length < 3) vb.tvHint.visibility = View.VISIBLE else vb.tvHint.visibility = View.GONE
+            }
+        })
+
+        vb.btnRegister.setOnClickListener{
+            navigateTo(RegisterActivity::class.java)
         }
     }
 
@@ -37,11 +62,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
             showToast("信息不能为空")
             return
         }
-        val params = HashMap<String, Any>()
+        val params = mutableMapOf<String, Any>()
         params["mobile"] = account
         params["password"] = password
-        Api.config("app/login", params as Map<String, Any>?).postRequest(this@LoginActivity,object :CallBack{
+        OkApi.config(LOGIN, params).postRequest(this@LoginActivity,object :CallBack{
             override fun onSuccess(res: String) {
+                Log.d(TAG, "onSuccess: $res")
                 val gson = Gson()
                 val user = gson.fromJson(res, LoginResponse::class.java)
                 if (user.code == 1){

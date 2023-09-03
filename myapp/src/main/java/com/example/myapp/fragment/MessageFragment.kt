@@ -10,14 +10,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.MyApplication.TAG
-import com.example.myapp.activities.HomeActivity
 import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.MessageAdapter
-import com.example.myapp.api.Api
+import com.example.myapp.api.OkApi
 import com.example.myapp.api.CallBack
 import com.example.myapp.databinding.FragmentMessageBinding
 import com.example.myapp.entity.NewsEntity
 import com.example.myapp.entity.NewsResponse
+import com.example.myapp.linstener.OnItemClickListener
 import com.google.gson.Gson
 import java.io.Serializable
 
@@ -58,7 +58,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
 
         adapter = MessageAdapter(requireContext())
 
-        adapter.setOnItemClickListener(object : MessageAdapter.OnItemClickListener {
+        adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
                 // 点击当前view的时候调用view的点击监听事件，事件中执行自定义的接口方法返回当前view中信息, 打开一个Activity
                 val newsEntity = obj as NewsEntity
@@ -91,7 +91,7 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
     var data = mutableListOf<NewsEntity>()
     private fun getMessageList(isRefresh:Boolean) {
         val map = mutableMapOf<String, Any>()
-        Api.config("app/news/list",map).getRequest(context,object :CallBack{
+        OkApi.config("app/news/list",map).getRequest(context,object :CallBack{
             override fun onSuccess(res: String) {
                 if(isRefresh){
                     vb.refreshLayout.finishRefresh(true)
@@ -121,5 +121,4 @@ class MessageFragment : BaseFragment<FragmentMessageBinding>() {
             }
         })
     }
-
 }

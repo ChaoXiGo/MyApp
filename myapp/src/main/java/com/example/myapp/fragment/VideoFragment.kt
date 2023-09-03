@@ -3,18 +3,18 @@ package com.example.myapp.fragment
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapp.MyApplication.TAG
 import com.example.myapp.adapter.VideoAdapter
-import com.example.myapp.api.Api
+import com.example.myapp.api.OkApi
 import com.example.myapp.api.CallBack
 import com.example.myapp.databinding.FragmentVideoBinding
 import com.example.myapp.entity.VideoEntity
 import com.example.myapp.entity.VideoListEntity
+import com.example.myapp.linstener.OnItemClickListener
 import com.google.gson.Gson
+import java.io.Serializable
 
 
 /**
@@ -62,6 +62,13 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
         adapter = VideoAdapter(requireContext())
         vb.recyclerView.adapter = adapter
 
+        adapter.setOnItemClickListener(object : OnItemClickListener {
+            override fun onItemClick(obj: Serializable) {
+                val entity = obj as VideoEntity
+                showToast("点击成功$entity")
+            }
+        })
+
         // 下拉刷新控件
         vb.refreshLayout.setOnRefreshListener {
             /**
@@ -92,7 +99,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
         params.put("page",pageNum)
         params.put("limit",5)
         params.put("categoryId",categoryId)
-        Api.config("app/videolist/getlistbyid", params).getRequest(context,object :CallBack{
+        OkApi.config("app/videolist/getlistbyid", params).getRequest(context,object :CallBack{
             override fun onSuccess(res: String) {
                 if (isRefresh){
                     vb.refreshLayout.finishRefresh(true)

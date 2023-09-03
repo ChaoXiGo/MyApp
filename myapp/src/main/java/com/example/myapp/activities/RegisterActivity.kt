@@ -1,7 +1,14 @@
 package com.example.myapp.activities
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import com.example.myapp.api.Api
+import android.view.View
+import android.view.View.GONE
+import android.view.View.OnFocusChangeListener
+import android.view.View.VISIBLE
+import com.example.myapp.api.ApiConfig.REGISTER
+import com.example.myapp.api.OkApi
 import com.example.myapp.api.CallBack
 import com.example.myapp.databinding.ActivityRegisterBinding
 import com.example.myapp.entity.LoginResponse
@@ -14,12 +21,28 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
     }
 
     override fun initData() {
+        initListen()
+    }
 
+    private fun initListen(){
         vb.btnRegister.setOnClickListener{
-            val mobile = vb.username.text.trim().toString()
-            val password = vb.password.text.trim().toString()
+            val mobile = vb.etUsername.text.trim().toString()
+            val password = vb.etPassword.text.trim().toString()
             register(mobile,password)
         }
+        vb.etUsername.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                val length = vb.etUsername.text.toString().trim().length
+                if (length > 8 || length < 3) vb.tvHint.visibility = VISIBLE else vb.tvHint.visibility = GONE
+            }
+        })
     }
 
     private fun register(mobile: String, password: String) {
@@ -27,16 +50,18 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
             showToast("信息不能为空")
             return
         }
-        val params = HashMap<String, String>()
+        val params = mutableMapOf<String, Any>()
         params["mobile"] = mobile
         params["password"] = password
 
-        Api.config("app/register",params as MutableMap<String, Any>).postRequest(this@RegisterActivity,object : CallBack{
+        OkApi.config(REGISTER,params).postRequest(this@RegisterActivity,object : CallBack{
             override fun onSuccess(res: String) {
                 Log.d(TAG, "onSuccess: $res")
-                val user = Gson().fromJson(res, LoginResponse::class.java)
-                if (user.code == 1){
+                val response = Gson().fromJson(res, LoginResponse::class.java)
+                if (response.code == 1){
                     showToastSync("注册成功")
+                }else{
+                    showToastSync("用户名已存在")
                 }
             }
 

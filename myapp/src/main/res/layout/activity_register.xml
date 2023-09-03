@@ -1,76 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".activities.LoginActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/good_morning_img" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham"
+                android:text="Good "
+                android:textColor="#ffffff"
+                android:textSize="32sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gotham"
+                android:text="Morning"
+                android:textColor="#ffffff"
+                android:textSize="32sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="2dp"
+                android:background="#deff00" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/calibri"
+        android:gravity="center"
+        android:text="We pursue a relaxed gaming experience"
+        android:textColor="#9affffff"
+        android:textSize="10sp"
+        tools:ignore="SmallSp" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
         android:layout_centerVertical="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="30dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_marginBottom="32dp"
+        android:orientation="vertical"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#96ffffff"
+            android:theme="@style/EditScreenTextInputLayoutStyle">
+
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_phone"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/calibri"
+                android:hint="手機號"
+
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:text="用户名长度不符"
+                android:textColor="#cd0341"
+                android:textSize="10sp"
+                android:visibility="gone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="#96ffffff"
+            android:theme="@style/EditScreenTextInputLayoutStyle">
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableEnd="@drawable/ic_lock_white_24dp"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/calibri"
+                android:hint="卡密"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="18dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="80dp"
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
-                android:text="用户名:"
-                android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@null"
-                android:hint="输入账户" />
-
+                android:background="@drawable/buttonshapewhitebg"
+                android:fontFamily="@font/calibri"
+                android:foreground="@drawable/sel_text_ripple_bg"
+                android:text="起飛"
+                android:textAllCaps="false"
+                android:textColor="#96ffffff"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="#dddddd"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:paddingEnd="10dp"
-                android:text="密码:"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@null"
-                android:gravity="center"
-                android:hint="用户密码" />
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginVertical="10dp"
-            android:background="#dddddd"/>
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="@string/Register" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_freeze"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:textColor="#ffffff"
+            android:background="@drawable/somebuttonshapewhitebg"
+            android:text="凍結" />
+
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_check"
+            android:gravity="center"
+            android:background="@drawable/somebuttonshapewhitebg"
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:textColor="#ffffff"
+
+            android:text="查卡" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_change"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:background="@drawable/somebuttonshapewhitebg"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:textColor="#ffffff"
+
+            android:text="換綁" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_remove"
+            android:layout_width="50dp"
+            android:gravity="center"
+            android:background="@drawable/somebuttonshapewhitebg"
+            android:layout_height="wrap_content"
+            android:autoLink="all"
+            android:textColor="#ffffff"
+
+            android:text="解綁" />
+        <View
+            android:layout_width="10dp"
+            android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/tv_getid"
+            android:layout_width="100dp"
+            android:gravity="center"
+            android:background="@drawable/somebuttonshapewhitebg"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+
+            android:autoLink="all"
+            android:text="獲取設備號" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/app_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/calibri"
+        android:layout_marginBottom="120dp"
+        android:text="version"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textColor="#96ffffff"
+        android:textSize="16sp" />
+
 </RelativeLayout>

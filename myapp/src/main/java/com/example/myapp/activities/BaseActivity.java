@@ -1,6 +1,7 @@
 package com.example.myapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
@@ -51,5 +52,10 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
     public String getString(String key) {
         SharedPreferences sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE);
         return sharedPreferences.getString(key,"");
+    }
+
+    public void navigateTo(Class cls){
+        Intent intent = new Intent(this, cls);
+        startActivity(intent);
     }
 }

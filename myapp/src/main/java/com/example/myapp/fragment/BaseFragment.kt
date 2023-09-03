@@ -1,6 +1,8 @@
 package com.example.myapp.fragment
 
 import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Looper
 import android.view.LayoutInflater
@@ -40,15 +42,34 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
         Looper.loop()
     }
 
-    fun saveToSp(key: String, value: String) {
+    fun saveSp(key: String, value: String) {
         val sharedPreferences = activity?.getSharedPreferences("myapp", Context.MODE_PRIVATE)
         val edit = sharedPreferences?.edit()
         edit?.putString(key, value)
         edit?.apply()
     }
 
-    fun getString(key: String): String? {
+    fun getSp(key: String): String? {
         val sp = activity?.getSharedPreferences("myapp", Context.MODE_PRIVATE)
         return sp?.getString(key, "")
+    }
+
+    fun removeSp(key:String){
+        val sp = activity?.getSharedPreferences("myapp", Context.MODE_PRIVATE)
+        val edit:SharedPreferences.Editor? = sp?.edit()
+        edit?.remove(key)
+        edit?.apply()
+    }
+    fun navigateTo(className:Class<*>?){
+        startActivity(Intent(activity,className))
+    }
+
+    /**
+     * 跳转页面并选择任务栈格式
+     */
+    fun navigateToWithFlag(className:Class<*>?, flags:Int){
+        val intent = Intent(activity, className)
+        intent.flags = flags
+        startActivity(intent)
     }
 }

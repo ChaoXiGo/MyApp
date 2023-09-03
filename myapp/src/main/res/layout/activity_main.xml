@@ -1,39 +1,961 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    tools:context=".activities.LoginActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/custompage" />
+    </FrameLayout>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="90dp"
-        android:paddingLeft="44dp"
-        android:paddingRight="44dp">
+        android:layout_gravity="center"
+        android:background="#00000000"
+        android:gravity="center"
+        android:text="天使"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+    <LinearLayout
+        android:id="@+id/kdxz"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="12dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="12dp">
+
+       <!-- <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />-->
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取货(待更新)" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="送货" />
+
+        </com.google.android.material.tabs.TabLayout>
+
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/buttonshapewhitebg"
+            android:fontFamily="@font/calibri"
+            android:text="重選"
+            android:textAllCaps="false"
+            android:textColor="#96000000"
+            android:layout_marginTop="16dp"
             android:textSize="16sp"
-            android:text="@string/login"
-            android:layout_alignParentStart="true"/>
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:textSize="16sp"
-            android:text="@string/Register"
-            android:layout_alignParentEnd="true"/>
-    </RelativeLayout>
+            android:textStyle="bold"
+            android:foreground="@drawable/sel_text_ripple_bg"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取货" />
+
+            <!--<com.xw.repo.BubbleSeekBar
+                android:id="@+id/seek_start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                app:bsb_auto_adjust_section_mark="true"
+                app:bsb_max="10"
+                app:bsb_rtl="false"
+                app:bsb_second_track_color="@color/color_red"
+                app:bsb_section_count="10"
+                app:bsb_section_text_position="below_section_mark"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_touch_to_seek="true" />-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:background="@drawable/buttonshapewhitebg"
+            android:foreground="@drawable/sel_text_ripple_bg"
+            android:paddingEnd="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAllCaps="false"
+                android:textColor="#80000000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="送貨" />
+
+<!--            <com.xw.repo.BubbleSeekBar-->
+<!--                android:id="@+id/seek_end"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="15dp"-->
+<!--                app:bsb_auto_adjust_section_mark="true"-->
+<!--                app:bsb_max="10"-->
+<!--                app:bsb_rtl="false"-->
+<!--                app:bsb_second_track_color="@color/color_red"-->
+<!--                app:bsb_section_count="10"-->
+<!--                app:bsb_section_text_position="below_section_mark"-->
+<!--                app:bsb_show_section_mark="true"-->
+<!--                app:bsb_show_section_text="true"-->
+<!--                app:bsb_show_thumb_text="true"-->
+<!--                app:bsb_touch_to_seek="true" />-->
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:background="@drawable/buttonshapewhitebg"
+            android:foreground="@drawable/sel_text_ripple_bg"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingTop="12dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="12dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/buttonshapewhitebg"
+                    android:fontFamily="@font/calibri"
+                    android:foreground="@drawable/sel_text_ripple_bg"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:gravity="center"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:text="順路模式（刻度/2公里）"
+                                android:textColor="#ff282e3f"
+                                android:textSize="16sp" />
+
+                            <Switch
+                                android:id="@+id/orderDropby"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:focusableInTouchMode="false"
+                                tools:ignore="UseSwitchCompatOrMaterialXml" />
+                        </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/buttonshapewhitebg"
+                    android:fontFamily="@font/calibri"
+                    android:foreground="@drawable/sel_text_ripple_bg"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:layout_width="36dp"
+                            android:layout_height="23dp"
+                            android:text="類型"
+                            android:textColor="#ff282e3f"
+                            android:textSize="16sp"
+                            tools:ignore="MissingConstraints"
+                            tools:layout_editor_absoluteX="2dp"
+                            tools:layout_editor_absoluteY="2dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/pt"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="普通"
+                                android:textOn="普通" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/bm"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="幫買"
+                                android:textOn="幫買"></ToggleButton>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/bs"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="幫送"
+                                android:textOn="幫送"></ToggleButton>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/zs"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="專送"
+                                android:textOn="專送"></ToggleButton>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/tc"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="同城"
+                                android:textOn="同城" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/zd"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:clickable="false"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="轉單"
+                                android:textOn="轉單"></ToggleButton>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/qc"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:clickable="false"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="全城"
+                                android:textOn="全城" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/xh"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="鮮花"
+                                android:textOn="鮮花"></ToggleButton>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/dg"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#96000000"
+                                android:textOff="蛋糕"
+                                android:textOn="蛋糕"></ToggleButton>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_just3"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/buttonshapewhitebg"
+                    android:fontFamily="@font/calibri"
+                    android:foreground="@drawable/sel_text_ripple_bg"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp">
+
+                        <ImageView
+                            android:id="@+id/ass_delivery5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="32dp"
+                            android:layout_height="26dp"
+                            android:text="其它"
+                            android:textColor="#282E3F"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/zdxs"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="抓單顯示"
+                                android:textOn="抓單顯示" />
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/sdsx"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="手動刷新"
+                                android:textOn="手動刷新" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/xinjl"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="新距離"
+                                android:textOn="新距離" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/mec"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="免二次"
+                                android:textOn="免二次" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center">
+
+                            <ToggleButton
+                                android:id="@+id/qdbd"
+                                android:layout_width="104dp"
+                                android:layout_height="36dp"
+                                android:background="@drawable/somebuttonshapewhitebg"
+                                android:fontFamily="@font/calibri"
+                                android:foreground="@drawable/sel_text_ripple_bg"
+                                android:gravity="center"
+                                android:textColor="#333333"
+                                android:textOff="接单补刀"
+                                android:textOn="接单补刀"
+                                android:visibility="gone" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+
+                                android:gravity="center">
+
+                                <ToggleButton
+                                    android:id="@+id/fangjiance"
+                                    android:layout_width="104dp"
+                                    android:layout_height="36dp"
+                                    android:background="@drawable/somebuttonshapewhitebg"
+                                    android:fontFamily="@font/calibri"
+                                    android:foreground="@drawable/sel_text_ripple_bg"
+                                    android:gravity="center"
+                                    android:textColor="#333333" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/layout_just4"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/buttonshapewhitebg"
+                    android:fontFamily="@font/calibri"
+                    android:foreground="@drawable/sel_text_ripple_bg"
+                    android:orientation="vertical"
+                    android:paddingLeft="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingRight="16dp"
+                    android:paddingBottom="12dp">
+
+                    <LinearLayout
+                        android:id="@+id/show1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center_vertical"
+                        android:visibility="visible">
+
+                        <ImageView
+                            android:id="@+id/ass_delivery"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="0.3"
+                            android:text="取貨"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/Pi_startDist"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/somebuttonshapewhitebg"
+                            android:fontFamily="@font/calibri"
+                            android:foreground="@drawable/sel_text_ripple_bg"
+                            android:gravity="center"
+                            android:hint="为空则无视"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:maxLines="3"
+                            android:text=""
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="0.5"
+                            android:text="公里以内"
+                            android:textColor="#ff333333"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/show11"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:id="@+id/show2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/ass_delivery1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="0.3"
+                            android:text="送货"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_startDist"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/somebuttonshapewhitebg"
+                            android:fontFamily="@font/calibri"
+                            android:foreground="@drawable/sel_text_ripple_bg"
+                            android:gravity="center"
+                            android:hint="为空要都空"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text=""
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="0.5"
+                            android:text="公里以上"
+                            android:textColor="#ff333333"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/show22"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:id="@+id/show3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/ass_delivery2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="20dp"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="0.3"
+                            android:text="价格"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/et_price"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/somebuttonshapewhitebg"
+                            android:fontFamily="@font/calibri"
+                            android:foreground="@drawable/sel_text_ripple_bg"
+                            android:gravity="center"
+                            android:hint="为空则无视"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text=""
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="19dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="0.5"
+                            android:text="元钱及以上"
+                            android:textColor="#ff333333"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5px"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical">
+
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="7dp"
+                            android:layout_marginRight="16dp"
+                            android:layout_weight="0.3"
+                            android:text="接单速度"
+                            android:textColor="#ff333333"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/Globalspeed"
+                            android:layout_width="0dp"
+                            android:layout_height="36dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/somebuttonshapewhitebg"
+                            android:fontFamily="@font/calibri"
+                            android:foreground="@drawable/sel_text_ripple_bg"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:maxLength="4"
+                            android:text="1000"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="38dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="0.5"
+                            android:background="@null"
+                            android:text="刷新和接单速度"
+                            android:textColor="#ff333333"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6.5dp"
+                        android:gravity="center"
+                        android:text="到期时间 :"
+                        android:textColor="#7C7C7C"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_dueData"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="2023-08-28"
+                        android:textColor="#7C7C7C"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tv_dueTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="7dp"
+                        android:text="17:08:44"
+                        android:textColor="#7C7C7C"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="卡类型:"
+                        android:textColor="#7C7C7C"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_resolution"
+                        android:layout_width="80dp"
+                        android:layout_height="19dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#7C7C7C"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="13dp"
+                        android:text="软件版本："
+                        android:textColor="#7C7C7C"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="鸡鸡卡"
+                        android:textColor="#7C7C7C"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btn_commit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/buttonshapewhitebg"
+                        android:fontFamily="@font/calibri"
+                        android:foreground="@drawable/sel_text_ripple_bg"
+                        android:text="启动" />
+
+
+                    <SeekBar
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/buttonshapewhitebg"
+                        android:fontFamily="@font/calibri"
+                        android:foreground="@drawable/sel_text_ripple_bg"
+                        android:max="100"
+                        android:progress="0" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </LinearLayout>
 </RelativeLayout>

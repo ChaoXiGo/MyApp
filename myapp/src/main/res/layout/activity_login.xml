@@ -93,7 +93,7 @@
         android:paddingLeft="32dp"
         android:paddingRight="32dp">
 
-        <com.ncorti.slidetoact.SlideToActView
+       <!-- <com.ncorti.slidetoact.SlideToActView
             android:id="@+id/example_gray_on_green"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             app:text_size="12sp"
             app:slider_height="80dp"
             app:slider_locked="false"
-            app:bounce_on_start="true" />
+            app:bounce_on_start="true" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

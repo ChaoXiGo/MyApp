@@ -1,3 +1,5 @@
+/photo/
+/retrofit/
 *.iml
 .gradle
 /local.properties

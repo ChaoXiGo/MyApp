@@ -39,8 +39,7 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
 
         // 2`创建adapter
         adapter = MyCollectAdapter(this)
-
-        getCollectInfo()
+        // getCollectInfo()
     }
 
     var collectList = ArrayList<VideoEntity>()

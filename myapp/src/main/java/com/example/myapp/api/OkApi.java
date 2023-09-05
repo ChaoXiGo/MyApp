@@ -4,6 +4,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 import static com.example.myapp.api.ApiConfig.BASE_URl;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -42,6 +44,7 @@ public class OkApi {
     public static OkApi config(String url, Map<String, Object> params) {
 
         client = new OkHttpClient.Builder()
+                .callTimeout(1000,MILLISECONDS)
                 .build();
         requestUrl = BASE_URl + url;
         mParams = params;
@@ -57,7 +60,7 @@ public class OkApi {
                 RequestBody.create(MediaType.parse("application/json;charset=utf-8")
                         , jsonStr);
 
-        //第三步创建Rquest
+        //第三步创建Request
         Request request = new Request.Builder()
                 .url(requestUrl)
                 .addHeader("contentType", "application/json;charset=UTF-8")
@@ -104,7 +107,6 @@ public class OkApi {
                 .get()
                 .build();
         Call call = client.newCall(request);
-        Log.e("getRequest","   getRequest_start");
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

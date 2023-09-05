@@ -1,14 +1,13 @@
 package com.example.myapp.activities
 
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.example.myapp.R
 import com.example.myapp.adapter.MyPagerAdapter
 import com.example.myapp.databinding.ActivityHomeBinding
 import com.example.myapp.entity.TabEntity
 import com.example.myapp.fragment.HomeFragment
-import com.example.myapp.fragment.MessageFragment
+import com.example.myapp.fragment.NewsFragment
 import com.example.myapp.fragment.MyFragment
 import com.flyco.tablayout.listener.CustomTabEntity
 import com.flyco.tablayout.listener.OnTabSelectListener
@@ -34,14 +33,22 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     override fun initData() {
         mFragments.add(HomeFragment.newInstance())
-        mFragments.add(MessageFragment.newInstance())
+        mFragments.add(NewsFragment.newInstance())
         mFragments.add(MyFragment.newInstance())
-
         for (i in mTitles.indices) {
             mTabEntities.add(TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]))
         }
+
+        initListen()
         // 将底部按钮添加到组件管理器中
         vb.commonTab.setTabData(mTabEntities)
+        vb.viewPage.offscreenPageLimit = mFragments.size
+
+        // 适配器交互渲染fragment
+        vb.viewPage.adapter = MyPagerAdapter(supportFragmentManager, mTitles, mFragments)
+    }
+
+    private fun initListen() {
         vb.commonTab.setOnTabSelectListener(object : OnTabSelectListener{
             override fun onTabSelect(position: Int) {
                 vb.viewPage.currentItem = position
@@ -49,22 +56,20 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
             override fun onTabReselect(position: Int) {
             }
         })
-        vb.viewPage.offscreenPageLimit = mFragments.size
 
         vb.viewPage.setOnPageChangeListener(object : OnPageChangeListener{
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
-            ) {}
+            ) {
+
+            }
             override fun onPageSelected(position: Int) {
-               vb.commonTab.currentTab = position
+                vb.commonTab.currentTab = position
             }
             override fun onPageScrollStateChanged(state: Int) {
             }
         })
-        // 适配器交互渲染fragment
-        vb.viewPage.adapter = MyPagerAdapter(supportFragmentManager, mTitles, mFragments)
-
     }
 }

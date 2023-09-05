@@ -168,7 +168,22 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
+        <com.ncorti.slidetoact.SlideToActView
+            android:id="@+id/example_gray_on_green"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="20dp"
+            app:animation_duration="250"
+            app:icon_margin="1dp"
+            app:inner_color="#000E9A4D"
+            app:outer_color="#000E9A4D"
+            app:slider_height="60dp"
+            app:slider_icon="@drawable/ic_phone"
+            app:slider_icon_color="#10ED2D"
+            app:slider_locked="false"
+            app:text="起                          飛"
+            app:text_color="#00FFFEFE"
+            app:text_size="18sp" />
 
     </LinearLayout>
 

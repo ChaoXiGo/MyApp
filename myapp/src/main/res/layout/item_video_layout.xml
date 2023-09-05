@@ -87,6 +87,7 @@
             android:layout_height="39dp">
 
             <LinearLayout
+                android:id="@+id/ll_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -110,6 +111,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_collect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
@@ -118,8 +120,8 @@
 
                 <ImageView
                     android:id="@+id/img_collect"
-                    android:layout_width="19dp"
-                    android:layout_height="19dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:src="@mipmap/collect" />
 
                 <TextView
@@ -134,6 +136,7 @@
 
 
             <LinearLayout
+                android:id="@+id/ll_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

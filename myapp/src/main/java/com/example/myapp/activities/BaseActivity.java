@@ -14,11 +14,13 @@ import androidx.viewbinding.ViewBinding;
 
 public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity {
     protected T vb;
+    private Toast currentToast = null;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar supportActionBar = getSupportActionBar();
-        if (supportActionBar != null){
+        if (supportActionBar != null) {
             supportActionBar.hide();
         }
         vb = initBinding();
@@ -30,31 +32,36 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
 
     abstract void initData();
 
-    public void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    public void showToast(String message) {
+        if (currentToast != null) {
+            currentToast.cancel(); // 关闭当前的 Toast
+        }
+        currentToast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        currentToast.show();
     }
 
     /**
      * 主线程执行Toast
      */
-    public void showToastSync(String message){
+    public void showToastSync(String message) {
         Looper.prepare();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         Looper.loop();
     }
 
-    public void saveToSp(String key, String value){
+    public void saveToSp(String key, String value) {
         SharedPreferences sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();
     }
+
     public String getString(String key) {
         SharedPreferences sharedPreferences = getSharedPreferences("myapp", Context.MODE_PRIVATE);
-        return sharedPreferences.getString(key,"");
+        return sharedPreferences.getString(key, "");
     }
 
-    public void navigateTo(Class cls){
+    public void navigateTo(Class cls) {
         Intent intent = new Intent(this, cls);
         startActivity(intent);
     }

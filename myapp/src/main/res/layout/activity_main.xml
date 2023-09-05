@@ -65,7 +65,7 @@
         </com.google.android.material.tabs.TabLayout>
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="取货" />
 
-           <!-- <com.xw.repo.BubbleSeekBar
+            <!--<com.xw.repo.BubbleSeekBar
                 android:id="@+id/seek_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -130,21 +130,21 @@
                 android:textStyle="bold"
                 android:text="送貨" />
 
-<!--            <com.xw.repo.BubbleSeekBar-->
-<!--                android:id="@+id/seek_end"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="15dp"-->
-<!--                app:bsb_auto_adjust_section_mark="true"-->
-<!--                app:bsb_max="10"-->
-<!--                app:bsb_rtl="false"-->
-<!--                app:bsb_second_track_color="@color/color_red"-->
-<!--                app:bsb_section_count="10"-->
-<!--                app:bsb_section_text_position="below_section_mark"-->
-<!--                app:bsb_show_section_mark="true"-->
-<!--                app:bsb_show_section_text="true"-->
-<!--                app:bsb_show_thumb_text="true"-->
-<!--                app:bsb_touch_to_seek="true" />-->
+           <!-- <com.xw.repo.BubbleSeekBar
+                android:id="@+id/seek_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                app:bsb_auto_adjust_section_mark="true"
+                app:bsb_max="10"
+                app:bsb_rtl="false"
+                app:bsb_second_track_color="@color/color_red"
+                app:bsb_section_count="10"
+                app:bsb_section_text_position="below_section_mark"
+                app:bsb_show_section_mark="true"
+                app:bsb_show_section_text="true"
+                app:bsb_show_thumb_text="true"
+                app:bsb_touch_to_seek="true" />-->
 
         </LinearLayout>
 
@@ -502,7 +502,6 @@
                                 android:textOn="抓單顯示" />
 
                         </LinearLayout>
-
 
 
                         <LinearLayout

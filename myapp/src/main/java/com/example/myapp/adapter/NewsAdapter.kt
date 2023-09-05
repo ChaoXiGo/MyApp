@@ -11,9 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
 import com.example.myapp.entity.NewsEntity
 import com.example.myapp.linstener.OnItemClickListener
-import java.io.Serializable
 
-class MessageAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var mInfo: List<NewsEntity>
 
@@ -33,19 +32,19 @@ class MessageAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.V
         when (viewType) {
             1 -> {
                 val view =
-                    LayoutInflater.from(context).inflate(R.layout.item_message_one, parent, false)
+                    LayoutInflater.from(context).inflate(R.layout.item_news_one, parent, false)
                 return ViewHolderOne(view)
             }
 
             2 -> {
                 val view =
-                    LayoutInflater.from(context).inflate(R.layout.item_message_two, parent, false)
+                    LayoutInflater.from(context).inflate(R.layout.item_news_two, parent, false)
                 return ViewHolderTwo(view)
             }
 
             else -> {
                 val view =
-                    LayoutInflater.from(context).inflate(R.layout.item_message_three, parent, false)
+                    LayoutInflater.from(context).inflate(R.layout.item_news_three, parent, false)
                 return ViewHolderThree(view)
             }
         }

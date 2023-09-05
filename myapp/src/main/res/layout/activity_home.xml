@@ -1,29 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical"
-    tools:context=".activities.HomeActivity">
+    android:focusableInTouchMode="true"
+    tools:context=".activities.LoginActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/custompage" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
         <com.example.myapp.view.CustomViewPager
             android:id="@+id/view_page"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#FFFFFF" />
+
         <com.flyco.tablayout.CommonTabLayout
             android:id="@+id/common_tab"
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            app:tl_textsize="13sp"
-            app:tl_textSelectColor="#0025ff"
-            app:tl_textUnselectColor="@color/black"/>
+            android:background="@drawable/buttonshapewhitebg"
+            android:fontFamily="@font/calibri"
+            android:foreground="@drawable/sel_text_ripple_bg"
+            app:tl_textSelectColor="#96ffffff"
+            app:tl_textUnselectColor="@color/black"
+            app:tl_textsize="13sp" />
+    </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

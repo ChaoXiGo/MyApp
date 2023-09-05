@@ -32,8 +32,11 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     abstract fun initData()
 
+    var currentToast: Toast? = null
     fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        currentToast?.cancel() // 关闭当前的 Toast
+        currentToast = Toast.makeText(context, message, Toast.LENGTH_SHORT)
+        currentToast?.show()
     }
 
     open fun showToastSync(msg: String?) {

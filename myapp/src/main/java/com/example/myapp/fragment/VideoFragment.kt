@@ -7,34 +7,36 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.adapter.VideoAdapter
-import com.example.myapp.api.OkApi
-import com.example.myapp.api.CallBack
+import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentVideoBinding
 import com.example.myapp.entity.VideoEntity
-import com.example.myapp.entity.VideoListEntity
 import com.example.myapp.linstener.OnItemClickListener
-import com.google.gson.Gson
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
 
 
 /**
  * 每个tab的内容fragment
  */
-class VideoFragment : BaseFragment<FragmentVideoBinding>(){
+class VideoFragment : BaseFragment<FragmentVideoBinding>() {
     @SuppressLint("HandlerLeak")
     private val handler: Handler =
-    object : Handler() {
-        override fun handleMessage(msg: Message) {
-            super.handleMessage(msg)
-            if (msg.what == 0) {
-
-                adapter.notifyDataSetChanged()
+        object : Handler() {
+            override fun handleMessage(msg: Message) {
+                super.handleMessage(msg)
+                if (msg.what == 0) {
+                    adapter.setInfo(data)
+                    // 设置适配器给recyclerView
+                    vb.recyclerView.adapter = adapter
+                    adapter.notifyDataSetChanged()
+                }
             }
         }
-    }
 
     // 当前tab Id
     var categoryId: Int = 0
+
     // 当前页数
     private var pageNum: Int = 1
 
@@ -58,10 +60,8 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         vb.recyclerView.layoutManager = layoutManager
-        // 设置适配器给recyclerView
-        adapter = VideoAdapter(requireContext())
-        vb.recyclerView.adapter = adapter
 
+        adapter = VideoAdapter(requireContext())
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
                 val entity = obj as VideoEntity
@@ -90,16 +90,55 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
     lateinit var adapter: VideoAdapter
 
     var data = mutableListOf<VideoEntity>()
+
     /**
      * 接口获取数据
      */
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "CheckResult")
     fun getVideoList(isRefresh: Boolean) {
         val params = mutableMapOf<String, Any>()
-        params.put("page",pageNum)
-        params.put("limit",5)
-        params.put("categoryId",categoryId)
-        OkApi.config("app/videolist/getlistbyid", params).getRequest(context,object :CallBack{
+        params.put("page", pageNum)
+        params.put("limit", 5)
+        params.put("categoryId", categoryId)
+
+        RetrofitApi.config(requireContext())
+            .getListById(pageNum, 5, categoryId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                if (isRefresh) {
+                    vb.refreshLayout.finishRefresh(true)
+                } else {
+                    vb.refreshLayout.finishLoadMore(true)
+                }
+                if (it.code == 1){
+                    val list = it.data
+                    if (list!= null && list.size >0){
+                        // 进行刷新动作界面为上， 显示第一页， 否则加载数据添加到集合
+                        if (isRefresh){
+                            data = list
+                        }else{
+                            data.addAll(list)
+                        }
+                        handler.sendEmptyMessage(0)
+                    }else{
+                        if (isRefresh) {
+                            showToastSync("暂时无数据")
+                        } else {
+                            showToastSync("没有更多数据")
+                        }
+                    }
+                }
+            }, {
+                if (isRefresh) {
+                    vb.refreshLayout.finishRefresh(true)
+                } else {
+                    vb.refreshLayout.finishLoadMore(true)
+                }
+                showToast("请求超时，检查网络连接或服务器断开连接")
+            })
+
+        /* OkApi.config("app/videolist/getlistbyid", params).getRequest(context,object :CallBack{
             override fun onSuccess(res: String) {
                 if (isRefresh){
                     vb.refreshLayout.finishRefresh(true)
@@ -117,8 +156,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
                             data.addAll(videoList)
                         }
                         // 传入参数
-                        adapter.setInfo(data)
-                      // handler.sendEmptyMessage(0)
+                      handler.sendEmptyMessage(0)
                     }else{
                         if (isRefresh) {
                             showToastSync("暂时无数据")
@@ -136,6 +174,6 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>(){
                     vb.refreshLayout.finishLoadMore(true)
                 }
             }
-        })
+        }) */
     }
 }

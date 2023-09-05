@@ -1,5 +1,6 @@
 package com.example.myapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.util.Log
@@ -7,15 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.MyApplication.TAG
 import com.example.myapp.R
 import com.example.myapp.api.OkApi
 import com.example.myapp.api.CallBack
+import com.example.myapp.api.RetrofitApi
 import com.example.myapp.entity.VideoEntity
 import com.example.myapp.linstener.OnItemClickListener
 import com.squareup.picasso.Picasso
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class VideoAdapter(context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -66,6 +72,9 @@ class VideoAdapter(context: Context) :
         var tvCollect: TextView = itemView.findViewById(R.id.collect)
         var img_header: ImageView = itemView.findViewById(R.id.img_header)
         var img_cover: ImageView = itemView.findViewById(R.id.img_cover)
+        var ll_comment: LinearLayout = itemView.findViewById(R.id.ll_comment)
+        var ll_collect: LinearLayout = itemView.findViewById(R.id.ll_collect)
+        var ll_like: LinearLayout = itemView.findViewById(R.id.ll_like)
         var img_comment: ImageView = itemView.findViewById(R.id.img_comment)
         var img_collect: ImageView = itemView.findViewById(R.id.img_collect)
         var dz: ImageView = itemView.findViewById(R.id.img_like)
@@ -80,7 +89,7 @@ class VideoAdapter(context: Context) :
             itemView.setOnClickListener {
                 mOnItemClickListener.onItemClick(entity)
             }
-            img_collect.setOnClickListener {
+            ll_collect.setOnClickListener {
                 var collectNum = tvCollect.text.toString().toInt()
                 if (flagCollect) {
                     // 已收藏， 点击后收藏数减1， 文字颜色白色， 图片为收藏样式， post请求保存
@@ -101,7 +110,7 @@ class VideoAdapter(context: Context) :
                 }
                 flagCollect = !flagCollect
             }
-            dz.setOnClickListener {
+            ll_like.setOnClickListener {
                 var dzNum = tvDz.text.toString().toInt()
                 if (flagLike) {
                     if (dzNum > 0) {
@@ -124,12 +133,24 @@ class VideoAdapter(context: Context) :
             itemView.tag = this
         }
 
+        @SuppressLint("CheckResult")
         private fun updateCount(vid: Int, i1: Int, b: Boolean) {
-            val map = mutableMapOf<String, Any>()
+            /* val map = mutableMapOf<String, Any>()
             map.put("type", i1)
             map.put("vid", vid)
-            map.put("flag", b)
-            OkApi.config("app/videolist/updateCount", map).postRequest(mContext, object : CallBack {
+            map.put("flag", b) */
+            RetrofitApi.config(mContext)
+                .updateCount(i1,vid,b)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show()
+                },{
+                    Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show()
+
+                })
+
+           /*  OkApi.config("app/videolist/updateCount", map).postRequest(mContext, object : CallBack {
                 override fun onSuccess(res: String) {
                     Log.d(TAG, "updateCount已执行" + res)
                 }
@@ -138,7 +159,7 @@ class VideoAdapter(context: Context) :
                     //TODO("Not yet implemented")
                     Log.d(TAG, "updateCount已执行" + t)
                 }
-            })
+            }) */
         }
     }
 }

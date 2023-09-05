@@ -30,8 +30,7 @@
                 android:id="@+id/thumb"
                 android:layout_width="108dp"
                 android:layout_height="64dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/news_pic" />
+                android:scaleType="fitXY" />
         </LinearLayout>
 
         <LinearLayout

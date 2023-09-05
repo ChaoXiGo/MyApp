@@ -12,9 +12,6 @@ public class RetrofitUtil {
     }
 
     static Retrofit retrofit;
-    // static String BASE_URL = "https://jsonplaceholder.typicode.com/";
-    // static String BASE_URL = "https://reqres.in/";
-    // static String BASE_URL = "http://n4h9yq.natappfree.cc/";
     static String BASE_URL = "http://192.168.1.8:8080/";
 
     static {

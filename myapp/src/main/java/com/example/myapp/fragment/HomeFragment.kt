@@ -1,22 +1,14 @@
 package com.example.myapp.fragment
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.myapp.MyApplication.TAG
 import com.example.myapp.adapter.HomeAdapter
-import com.example.myapp.api.OkApi
-import com.example.myapp.api.ApiConfig.VIDEO_CATEGORY_LIST
-import com.example.myapp.api.CallBack
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentHomeBinding
-import com.example.myapp.entity.VideoCategoryEntity
-import com.google.gson.Gson
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     companion object {
@@ -25,7 +17,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             HomeFragment().apply {}
     }
 
-    var mFragments: ArrayList<Fragment> = ArrayList()
+    private var mFragments: ArrayList<Fragment> = ArrayList()
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?

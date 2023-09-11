@@ -13,14 +13,10 @@ import com.example.myapp.MyApplication.TAG
 import com.example.myapp.activities.LoginActivity
 import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.NewsAdapter
-import com.example.myapp.api.CallBack
-import com.example.myapp.api.OkApi
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentNewsBinding
 import com.example.myapp.entity.NewsEntity
-import com.example.myapp.entity.NewsResponse
 import com.example.myapp.linstener.OnItemClickListener
-import com.google.gson.Gson
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable

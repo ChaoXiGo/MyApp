@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.myapp.R
-import com.example.myapp.entity.VideoEntity
+import com.example.myapp.entity.NewsEntity
 import com.squareup.picasso.Picasso
-import java.util.zip.Inflater
 
 class MyCollectAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val mContext = context
-    private var mData = ArrayList<VideoEntity>()
-    fun setInfo(data:ArrayList<VideoEntity>){
+    private var mData = mutableListOf<NewsEntity>()
+    fun setInfo(data: MutableList<NewsEntity>){
         mData = data
     }
 
@@ -33,11 +31,11 @@ class MyCollectAdapter(context: Context) : RecyclerView.Adapter<RecyclerView.Vie
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val vh = holder as ViewHolder
         val entity = mData[position]
-        vh.tvTitle.text = entity.vtitle
-        vh.tvAuthor.text = entity.author
+        vh.tvTitle.text = entity.newsTitle
+        vh.tvAuthor.text = entity.authorName
 
-        Picasso.with(mContext).load(entity.headurl).into(vh.img_header)
-        Picasso.with(mContext).load(entity.coverurl).into(vh.img_cover)
+        Picasso.with(mContext).load(entity.headerUrl).into(vh.img_header)
+        // Picasso.with(mContext).load(entity.).into(vh.img_cover)
     }
 
     class ViewHolder(view:View) : RecyclerView.ViewHolder(view) {

@@ -3,7 +3,6 @@ package com.example.myapp.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +11,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapp.MyApplication.TAG
 import com.example.myapp.R
-import com.example.myapp.api.OkApi
-import com.example.myapp.api.CallBack
 import com.example.myapp.api.RetrofitApi
-import com.example.myapp.entity.VideoEntity
+import com.example.myapp.entity.VideoResponse.VideoEntity
 import com.example.myapp.linstener.OnItemClickListener
 import com.squareup.picasso.Picasso
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -99,14 +95,15 @@ class VideoAdapter(context: Context) :
                         tvCollect.setTextColor(Color.parseColor("#161616"))
                         img_collect.setImageResource(R.mipmap.collect)
                         // 保存到数据库
-                        updateCount(mInfo[mPosition].vid, 1, !flagCollect)
+                        // updateCount(mInfo[mPosition].vid, 1, !flagCollect)
+                        updateCount(entity.vid, 1, !flagCollect)
                     }
                 } else {
                     ++collectNum
                     tvCollect.text = collectNum.toString()
                     tvCollect.setTextColor(Color.parseColor("#B22222"))
                     img_collect.setImageResource(R.mipmap.collect_select)
-                    updateCount(mInfo[mPosition].vid, 1, !flagCollect)
+                    updateCount(entity.vid, 1, !flagCollect)
                 }
                 flagCollect = !flagCollect
             }
@@ -118,14 +115,14 @@ class VideoAdapter(context: Context) :
                         tvDz.text = dzNum.toString()
                         tvDz.setTextColor(Color.parseColor("#161616"))
                         dz.setImageResource(R.mipmap.dianzan)
-                        updateCount(mInfo[mPosition].vid, 2, !flagLike)
+                        updateCount(entity.vid, 2, !flagLike)
                     }
                 } else {
                     ++dzNum
                     tvDz.text = dzNum.toString()
                     tvDz.setTextColor(Color.parseColor("#B22222"))
                     dz.setImageResource(R.mipmap.dianzan_select)
-                    updateCount(mInfo[mPosition].vid, 2, !flagLike)
+                    updateCount(entity.vid, 2, !flagLike)
                 }
                 flagLike = !flagLike
             }
@@ -134,32 +131,37 @@ class VideoAdapter(context: Context) :
         }
 
         @SuppressLint("CheckResult")
-        private fun updateCount(vid: Int, i1: Int, b: Boolean) {
-            /* val map = mutableMapOf<String, Any>()
-            map.put("type", i1)
-            map.put("vid", vid)
-            map.put("flag", b) */
+        private fun updateCount(vid: Int, type: Int, flag: Boolean) {
+            /* val params = mutableMapOf<String, Any>()
+            params["type"] = type
+            params["vid"] = vid
+            params["flag"] = flag */
             RetrofitApi.config(mContext)
-                .updateCount(i1,vid,b)
+                .updateCount(vid, type, flag)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show()
-                },{
+                }, {
                     Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show()
 
                 })
 
-           /*  OkApi.config("app/videolist/updateCount", map).postRequest(mContext, object : CallBack {
-                override fun onSuccess(res: String) {
-                    Log.d(TAG, "updateCount已执行" + res)
-                }
+            /*
+             val map = mutableMapOf<String, Any>()
+             map.put("type", i1)
+             map.put("vid", vid)
+             map.put("flag", b)
+            OkApi.config("app/videolist/updateCount", map).postRequest(mContext, object : CallBack {
+                 override fun onSuccess(res: String) {
+                     Log.d(TAG, "updateCount已执行" + res)
+                 }
 
-                override fun onFailure(t: Throwable) {
-                    //TODO("Not yet implemented")
-                    Log.d(TAG, "updateCount已执行" + t)
-                }
-            }) */
+                 override fun onFailure(t: Throwable) {
+                     //TODO("Not yet implemented")
+                     Log.d(TAG, "updateCount已执行" + t)
+                 }
+             }) */
         }
     }
 }

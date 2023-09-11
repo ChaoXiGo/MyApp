@@ -22,19 +22,19 @@ android {
         debug {
             keyAlias 'jsjdhdnkdk'
             keyPassword 'zjzjhdbdndkdkndndvdv'
-            storeFile file('C:\\Users\\35130\\Desktop\\jsjdhdnkdk.jks')
+            storeFile file('D:\\jsjdhdnkdk.jks')
             storePassword 'hsjsisbbdjdjdnnd'
         }
         release {
             keyAlias 'jsjdhdnkdk'
             keyPassword 'zjzjhdbdndkdkndndvdv'
-            storeFile file('C:\\Users\\35130\\Desktop\\jsjdhdnkdk.jks')
+            storeFile file('D:\\jsjdhdnkdk.jks')
             storePassword 'hsjsisbbdjdjdnnd'
         }
         success {
             keyAlias 'jsjdhdnkdk'
             keyPassword 'zjzjhdbdndkdkndndvdv'
-            storeFile file('C:\\Users\\35130\\Desktop\\jsjdhdnkdk.jks')
+            storeFile file('D:\\jsjdhdnkdk.jks')
             storePassword 'hsjsisbbdjdjdnnd'
         }
     }

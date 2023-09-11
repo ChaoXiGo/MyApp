@@ -66,10 +66,11 @@ class RegisterActivity : BaseActivity<ActivityRegisterBinding>() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                Log.d(TAG, "register: ${it.toString()}")
                 if (it.code == 1){
-                    showToastSync("注册成功")
+                    showToast("注册成功")
                 }else{
-                    showToastSync("用户名已存在")
+                    showToast("用户名已存在")
                 }
             },{
                 showToast("检查网络连接")

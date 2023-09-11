@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.adapter.VideoAdapter
+import com.example.myapp.entity.VideoResponse
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentVideoBinding
-import com.example.myapp.entity.VideoEntity
 import com.example.myapp.linstener.OnItemClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -64,7 +64,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
         adapter = VideoAdapter(requireContext())
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
-                val entity = obj as VideoEntity
+                val entity = obj as VideoResponse.VideoEntity
                 showToast("点击成功$entity")
             }
         })
@@ -89,7 +89,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
     lateinit var adapter: VideoAdapter
 
-    var data = mutableListOf<VideoEntity>()
+    var data = mutableListOf<VideoResponse.VideoEntity>()
 
     /**
      * 接口获取数据
@@ -97,9 +97,9 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
     @SuppressLint("NotifyDataSetChanged", "CheckResult")
     fun getVideoList(isRefresh: Boolean) {
         val params = mutableMapOf<String, Any>()
-        params.put("page", pageNum)
-        params.put("limit", 5)
-        params.put("categoryId", categoryId)
+        params["page"] = pageNum
+        params["limit"] = 5
+        params["categoryId"] = categoryId
 
         RetrofitApi.config(requireContext())
             .getListById(pageNum, 5, categoryId)

@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 class RetrofitApi {
     companion object {
         private var retrofit: Retrofit? = null
-        const val BASE_URl = "http://192.168.1.8:8080/"
+        private const val BASE_URl = "http://192.168.1.10:8080/"
         lateinit var mContext: Context
 
         fun config(context: Context): ApiService {

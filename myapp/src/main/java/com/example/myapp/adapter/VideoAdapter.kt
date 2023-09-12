@@ -13,7 +13,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
 import com.example.myapp.api.RetrofitApi
-import com.example.myapp.entity.VideoResponse.VideoEntity
+import com.example.myapp.entity.VideoResponse.DataBean.VideoEntity
 import com.example.myapp.linstener.OnItemClickListener
 import com.squareup.picasso.Picasso
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -27,6 +27,7 @@ class VideoAdapter(context: Context) :
 
     lateinit var mOnItemClickListener: OnItemClickListener
 
+    private lateinit var videoEntity:VideoEntity
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         mOnItemClickListener = onItemClickListener
     }
@@ -46,8 +47,8 @@ class VideoAdapter(context: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        videoEntity = mInfo[position]
         val vh = holder as ViewHolder
-        val videoEntity = mInfo[position]
         vh.tvTitle.text = videoEntity.vtitle
         vh.tvAuthor.text = videoEntity.author
         vh.tvDz.text = videoEntity.likeNum.toString()
@@ -56,11 +57,25 @@ class VideoAdapter(context: Context) :
 
         Picasso.with(mContext).load(videoEntity.headurl).into(vh.img_header)
         Picasso.with(mContext).load(videoEntity.coverurl).into(vh.img_cover)
-        vh.mPosition = position
-        vh.entity = mInfo[position]
+
+        val playurl = videoEntity.playurl
+        vh.entity = videoEntity
+        // 初始化收藏点赞状态
+        vh.collectState = videoEntity.collectState == 1
+        vh.likeState = videoEntity.likeState == 1
+        if (vh.collectState) {
+            // updateUIState(collectState,vh.tvCollect,vh.img_collect,R.mipmap.collect_select,R.mipmap.collect)
+            vh.tvCollect.setTextColor(Color.parseColor("#B22222"))
+            vh.img_collect.setImageResource(R.mipmap.collect_select)
+        }
+        if (vh.likeState) {
+            vh.tvDz.setTextColor(Color.parseColor("#B22222"))
+            vh.dz.setImageResource(R.mipmap.dianzan_select)
+        }
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         var tvTitle: TextView = itemView.findViewById(R.id.title)
         var tvAuthor: TextView = itemView.findViewById(R.id.author)
         var tvDz: TextView = itemView.findViewById(R.id.dz)
@@ -75,9 +90,8 @@ class VideoAdapter(context: Context) :
         var img_collect: ImageView = itemView.findViewById(R.id.img_collect)
         var dz: ImageView = itemView.findViewById(R.id.img_like)
 
-        var flagCollect = false
-        var flagLike = false
-        var mPosition: Int = 0
+        var collectState:Boolean = false
+        var likeState:Boolean = false
 
         lateinit var entity: VideoEntity
 
@@ -85,57 +99,14 @@ class VideoAdapter(context: Context) :
             itemView.setOnClickListener {
                 mOnItemClickListener.onItemClick(entity)
             }
-            ll_collect.setOnClickListener {
-                var collectNum = tvCollect.text.toString().toInt()
-                if (flagCollect) {
-                    // 已收藏， 点击后收藏数减1， 文字颜色白色， 图片为收藏样式， post请求保存
-                    if (collectNum > 0) {
-                        --collectNum
-                        tvCollect.text = collectNum.toString()
-                        tvCollect.setTextColor(Color.parseColor("#161616"))
-                        img_collect.setImageResource(R.mipmap.collect)
-                        // 保存到数据库
-                        // updateCount(mInfo[mPosition].vid, 1, !flagCollect)
-                        updateCount(entity.vid, 1, !flagCollect)
-                    }
-                } else {
-                    ++collectNum
-                    tvCollect.text = collectNum.toString()
-                    tvCollect.setTextColor(Color.parseColor("#B22222"))
-                    img_collect.setImageResource(R.mipmap.collect_select)
-                    updateCount(entity.vid, 1, !flagCollect)
-                }
-                flagCollect = !flagCollect
-            }
-            ll_like.setOnClickListener {
-                var dzNum = tvDz.text.toString().toInt()
-                if (flagLike) {
-                    if (dzNum > 0) {
-                        --dzNum
-                        tvDz.text = dzNum.toString()
-                        tvDz.setTextColor(Color.parseColor("#161616"))
-                        dz.setImageResource(R.mipmap.dianzan)
-                        updateCount(entity.vid, 2, !flagLike)
-                    }
-                } else {
-                    ++dzNum
-                    tvDz.text = dzNum.toString()
-                    tvDz.setTextColor(Color.parseColor("#B22222"))
-                    dz.setImageResource(R.mipmap.dianzan_select)
-                    updateCount(entity.vid, 2, !flagLike)
-                }
-                flagLike = !flagLike
-            }
+            ll_collect.setOnClickListener(this)
+            ll_like.setOnClickListener(this)
             // 通过tag 将ViewHolder和itemView绑定
             itemView.tag = this
         }
 
         @SuppressLint("CheckResult")
         private fun updateCount(vid: Int, type: Int, flag: Boolean) {
-            /* val params = mutableMapOf<String, Any>()
-            params["type"] = type
-            params["vid"] = vid
-            params["flag"] = flag */
             RetrofitApi.config(mContext)
                 .updateCount(vid, type, flag)
                 .subscribeOn(Schedulers.io())
@@ -144,24 +115,52 @@ class VideoAdapter(context: Context) :
                     Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show()
                 }, {
                     Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show()
-
                 })
+        }
 
-            /*
-             val map = mutableMapOf<String, Any>()
-             map.put("type", i1)
-             map.put("vid", vid)
-             map.put("flag", b)
-            OkApi.config("app/videolist/updateCount", map).postRequest(mContext, object : CallBack {
-                 override fun onSuccess(res: String) {
-                     Log.d(TAG, "updateCount已执行" + res)
-                 }
-
-                 override fun onFailure(t: Throwable) {
-                     //TODO("Not yet implemented")
-                     Log.d(TAG, "updateCount已执行" + t)
-                 }
-             }) */
+        override fun onClick(p0: View?) {
+            when(p0?.id){
+                R.id.ll_collect -> {
+                    var collectNum = tvCollect.text.toString().toInt()
+                    if (collectState) {
+                        // 已收藏， 点击后收藏数减1， 文字颜色白色， 图片为收藏样式
+                        if (collectNum > 0) {
+                            --collectNum
+                            tvCollect.text = collectNum.toString()
+                            tvCollect.setTextColor(Color.parseColor("#161616"))
+                            img_collect.setImageResource(R.mipmap.collect)
+                            // 保存到数据库
+                            updateCount(entity.vid, 1, !collectState)
+                        }
+                    } else {
+                        ++collectNum
+                        tvCollect.text = collectNum.toString()
+                        tvCollect.setTextColor(Color.parseColor("#B22222"))
+                        img_collect.setImageResource(R.mipmap.collect_select)
+                        updateCount(entity.vid, 1, !collectState)
+                    }
+                    collectState = !collectState
+                }
+                R.id.ll_like -> {
+                    var dzNum = tvDz.text.toString().toInt()
+                    if (likeState) {
+                        if (dzNum > 0) {
+                            --dzNum
+                            tvDz.text = dzNum.toString()
+                            tvDz.setTextColor(Color.parseColor("#161616"))
+                            dz.setImageResource(R.mipmap.dianzan)
+                            updateCount(entity.vid, 2, !likeState)
+                        }
+                    } else {
+                        ++dzNum
+                        tvDz.text = dzNum.toString()
+                        tvDz.setTextColor(Color.parseColor("#B22222"))
+                        dz.setImageResource(R.mipmap.dianzan_select)
+                        updateCount(entity.vid, 2, !likeState)
+                    }
+                    likeState = !likeState
+                }
+            }
         }
     }
 }

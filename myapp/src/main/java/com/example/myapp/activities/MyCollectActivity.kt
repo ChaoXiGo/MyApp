@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.adapter.MyCollectAdapter
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.ActivityMyCollectBinding
-import com.example.myapp.entity.NewsEntity
+import com.example.myapp.entity.NewsResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 
@@ -21,7 +21,7 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (msg.what == 0) {
-                adapter.setInfo(collectList)
+                // adapter.setInfo(collectList)
                 // 2`设置当前recycleView的adapter
                 vb.recyclerView.adapter = adapter
                 adapter.notifyDataSetChanged()
@@ -42,18 +42,18 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
 
         vb.refreshLayout.setOnRefreshListener {
             pageNum = 1
-            getCollectInfo(true)
+            // getCollectInfo(true)
         }
         vb.refreshLayout.setOnLoadMoreListener {
             pageNum++
-            getCollectInfo(false)
+            // getCollectInfo(false)
         }
-        getCollectInfo(true)
+        // getCollectInfo(true)
     }
 
-    var collectList = mutableListOf<NewsEntity>()
+    var collectList = mutableListOf<NewsResponse.NewsEntity>()
 
-    @SuppressLint("CheckResult")
+   /*  @SuppressLint("CheckResult")
     private fun getCollectInfo(isRefresh: Boolean) {
         RetrofitApi.config(this)
             .getCollectList(pageNum, 5)
@@ -66,7 +66,7 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
                     vb.refreshLayout.finishLoadMore(true)
                 }
                 if (it.code == 1 && it.data.size > 0) {
-                    val list = it.data
+                    val list = it.data.records
                     if (list != null && list.size > 0) {
                         if (isRefresh) {
                             collectList = list
@@ -89,7 +89,7 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
                     vb.refreshLayout.finishLoadMore(true)
                 }
                 showToast("收藏获取失败")
-            })
+            }) */
         /*  OkApi.config("app/news/list", mutableMapOf()).getRequest(this, object : CallBack {
              override fun onSuccess(res: String) {
                  val response = Gson().fromJson(res, VideoListEntity::class.java)
@@ -103,6 +103,6 @@ class MyCollectActivity : BaseActivity<ActivityMyCollectBinding>() {
              override fun onFailure(t: Throwable) {
 
              }
-         }) */
-    }
+         })
+    }*/
 }

@@ -15,7 +15,8 @@ import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.NewsAdapter
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentNewsBinding
-import com.example.myapp.entity.NewsEntity
+import com.example.myapp.entity.NewsResponse.NewsEntity
+
 import com.example.myapp.linstener.OnItemClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -105,7 +106,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
                 }
                 Log.d(TAG, "getMessageList: ${it.data}")
 
-                if (it.code == 1 && it.data.size > 0) {
+                if (it.code == 1 ) {
                     val list = it.data
                     if (list != null && list.size > 0) {
                         if (isRefresh) {

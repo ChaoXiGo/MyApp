@@ -3,13 +3,13 @@ package com.example.myapp.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
-import com.example.myapp.entity.NewsEntity
+import com.example.myapp.entity.NewsResponse
+import com.example.myapp.entity.NewsResponse.NewsEntity
 import com.example.myapp.linstener.OnItemClickListener
 
 class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -115,11 +115,7 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         lateinit var newsEntity: NewsEntity
 
         init {
-            itemView.setOnClickListener(object : OnClickListener {
-                override fun onClick(p0: View?) {
-                    mOnItemClickListener.onItemClick(newsEntity)
-                }
-            })
+            itemView.setOnClickListener { mOnItemClickListener.onItemClick(newsEntity) }
         }
     }
 
@@ -136,11 +132,7 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         lateinit var newsEntity: NewsEntity
 
         init {
-            itemView.setOnClickListener(object : OnClickListener {
-                override fun onClick(p0: View?) {
-                    mOnItemClickListener.onItemClick(newsEntity)
-                }
-            })
+            itemView.setOnClickListener { mOnItemClickListener.onItemClick(newsEntity) }
         }
 
     }
@@ -157,11 +149,7 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
         lateinit var newsEntity: NewsEntity
 
         init {
-            itemView.setOnClickListener(object : OnClickListener {
-                override fun onClick(p0: View?) {
-                    mOnItemClickListener.onItemClick(newsEntity)
-                }
-            })
+            itemView.setOnClickListener { mOnItemClickListener.onItemClick(newsEntity) }
         }
     }
 }

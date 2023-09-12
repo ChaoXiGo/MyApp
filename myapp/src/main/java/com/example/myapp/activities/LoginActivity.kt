@@ -4,14 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
-import com.example.myapp.MyApplication.TAG
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.ActivityLoginBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     override fun initBinding(): ActivityLoginBinding {
@@ -19,6 +16,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun initData() {
+        // 隐藏状态栏和导航栏
+
+        // 隐藏状态栏和导航栏
+        val decorView = window.decorView
+        val uiOptions = (View.SYSTEM_UI_FLAG_IMMERSIVE
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        decorView.systemUiVisibility = uiOptions
         initListen()
     }
 

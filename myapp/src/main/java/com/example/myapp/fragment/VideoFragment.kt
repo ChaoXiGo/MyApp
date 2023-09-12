@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.adapter.VideoAdapter
-import com.example.myapp.entity.VideoResponse
+import com.example.myapp.entity.VideoResponse.DataBean.VideoEntity
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentVideoBinding
+import com.example.myapp.entity.VideoResponse
 import com.example.myapp.linstener.OnItemClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -64,7 +65,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
         adapter = VideoAdapter(requireContext())
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
-                val entity = obj as VideoResponse.VideoEntity
+                val entity = obj as VideoEntity
                 showToast("点击成功$entity")
             }
         })
@@ -89,7 +90,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
 
     lateinit var adapter: VideoAdapter
 
-    var data = mutableListOf<VideoResponse.VideoEntity>()
+    var data = mutableListOf<VideoEntity>()
 
     /**
      * 接口获取数据
@@ -112,7 +113,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
                     vb.refreshLayout.finishLoadMore(true)
                 }
                 if (it.code == 1){
-                    val list = it.data
+                    val list = it.data.videoEntity
                     if (list!= null && list.size >0){
                         // 进行刷新动作界面为上， 显示第一页， 否则加载数据添加到集合
                         if (isRefresh){

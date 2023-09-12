@@ -12,7 +12,7 @@ public class VideoResponse {
     @SerializedName("message")
     private Object message;
     @SerializedName("data")
-    private List<VideoEntity> data;
+    private DataBean data;
 
     public int getCode() {
         return code;
@@ -30,154 +30,227 @@ public class VideoResponse {
         this.message = message;
     }
 
-    public List<VideoEntity> getData() {
+    public DataBean getData() {
         return data;
     }
 
-    public void setData(List<VideoEntity> data) {
+    public void setData(DataBean data) {
         this.data = data;
     }
 
-    public static class VideoEntity implements Serializable{
-        @SerializedName("vid")
-        private int vid;
-        @SerializedName("vtitle")
-        private String vtitle;
-        @SerializedName("author")
-        private String author;
-        @SerializedName("coverurl")
-        private String coverurl;
-        @SerializedName("headurl")
-        private String headurl;
-        @SerializedName("commentNum")
-        private int commentNum;
-        @SerializedName("likeNum")
-        private int likeNum;
-        @SerializedName("collectNum")
-        private int collectNum;
-        @SerializedName("playurl")
-        private String playurl;
-        @SerializedName("createTime")
-        private String createTime;
-        @SerializedName("updateTime")
-        private String updateTime;
-        @SerializedName("categoryId")
-        private int categoryId;
-        @SerializedName("categoryName")
-        private Object categoryName;
-        @SerializedName("videoSocialEntity")
-        private Object videoSocialEntity;
+    public static class DataBean {
+        @SerializedName("records")
+        private List<DataBean.VideoEntity> videoEntity;
+        @SerializedName("total")
+        private int total;
+        @SerializedName("size")
+        private int size;
+        @SerializedName("current")
+        private int current;
+        @SerializedName("orders")
+        private List<?> orders;
+        @SerializedName("optimizeCountSql")
+        private boolean optimizeCountSql;
+        @SerializedName("searchCount")
+        private boolean searchCount;
+        @SerializedName("countId")
+        private Object countId;
+        @SerializedName("maxLimit")
+        private Object maxLimit;
+        @SerializedName("pages")
+        private int pages;
 
-        public int getVid() {
-            return vid;
+        public List<DataBean.VideoEntity> getVideoEntity() {
+            return videoEntity;
         }
 
-        public void setVid(int vid) {
-            this.vid = vid;
+        public void setVideoEntity(List<DataBean.VideoEntity> VideoEntity) {
+            this.videoEntity = VideoEntity;
         }
 
-        public String getVtitle() {
-            return vtitle;
+        public int getTotal() {
+            return total;
         }
 
-        public void setVtitle(String vtitle) {
-            this.vtitle = vtitle;
+        public void setTotal(int total) {
+            this.total = total;
         }
 
-        public String getAuthor() {
-            return author;
+        public int getSize() {
+            return size;
         }
 
-        public void setAuthor(String author) {
-            this.author = author;
+        public void setSize(int size) {
+            this.size = size;
         }
 
-        public String getCoverurl() {
-            return coverurl;
+        public int getCurrent() {
+            return current;
         }
 
-        public void setCoverurl(String coverurl) {
-            this.coverurl = coverurl;
+        public void setCurrent(int current) {
+            this.current = current;
         }
 
-        public String getHeadurl() {
-            return headurl;
+        public List<?> getOrders() {
+            return orders;
         }
 
-        public void setHeadurl(String headurl) {
-            this.headurl = headurl;
+        public void setOrders(List<?> orders) {
+            this.orders = orders;
         }
 
-        public int getCommentNum() {
-            return commentNum;
+        public boolean isOptimizeCountSql() {
+            return optimizeCountSql;
         }
 
-        public void setCommentNum(int commentNum) {
-            this.commentNum = commentNum;
+        public void setOptimizeCountSql(boolean optimizeCountSql) {
+            this.optimizeCountSql = optimizeCountSql;
         }
 
-        public int getLikeNum() {
-            return likeNum;
+        public boolean isSearchCount() {
+            return searchCount;
         }
 
-        public void setLikeNum(int likeNum) {
-            this.likeNum = likeNum;
+        public void setSearchCount(boolean searchCount) {
+            this.searchCount = searchCount;
         }
 
-        public int getCollectNum() {
-            return collectNum;
+        public Object getCountId() {
+            return countId;
         }
 
-        public void setCollectNum(int collectNum) {
-            this.collectNum = collectNum;
+        public void setCountId(Object countId) {
+            this.countId = countId;
         }
 
-        public String getPlayurl() {
-            return playurl;
+        public Object getMaxLimit() {
+            return maxLimit;
         }
 
-        public void setPlayurl(String playurl) {
-            this.playurl = playurl;
+        public void setMaxLimit(Object maxLimit) {
+            this.maxLimit = maxLimit;
         }
 
-        public String getCreateTime() {
-            return createTime;
+        public int getPages() {
+            return pages;
         }
 
-        public void setCreateTime(String createTime) {
-            this.createTime = createTime;
+        public void setPages(int pages) {
+            this.pages = pages;
         }
 
-        public String getUpdateTime() {
-            return updateTime;
-        }
+        public static class VideoEntity implements Serializable {
+            @SerializedName("vid")
+            private int vid;
+            @SerializedName("vtitle")
+            private String vtitle;
+            @SerializedName("author")
+            private String author;
+            @SerializedName("coverurl")
+            private String coverurl;
+            @SerializedName("headurl")
+            private String headurl;
+            @SerializedName("commentNum")
+            private int commentNum;
+            @SerializedName("likeNum")
+            private int likeNum;
+            @SerializedName("collectNum")
+            private int collectNum;
+            @SerializedName("playurl")
+            private String playurl;
+            @SerializedName("collectState")
+            private int collectState;
+            @SerializedName("likeState")
+            private int likeState;
 
-        public void setUpdateTime(String updateTime) {
-            this.updateTime = updateTime;
-        }
+            public int getVid() {
+                return vid;
+            }
 
-        public int getCategoryId() {
-            return categoryId;
-        }
+            public void setVid(int vid) {
+                this.vid = vid;
+            }
 
-        public void setCategoryId(int categoryId) {
-            this.categoryId = categoryId;
-        }
+            public String getVtitle() {
+                return vtitle;
+            }
 
-        public Object getCategoryName() {
-            return categoryName;
-        }
+            public void setVtitle(String vtitle) {
+                this.vtitle = vtitle;
+            }
 
-        public void setCategoryName(Object categoryName) {
-            this.categoryName = categoryName;
-        }
+            public String getAuthor() {
+                return author;
+            }
 
-        public Object getVideoSocialEntity() {
-            return videoSocialEntity;
-        }
+            public void setAuthor(String author) {
+                this.author = author;
+            }
 
-        public void setVideoSocialEntity(Object videoSocialEntity) {
-            this.videoSocialEntity = videoSocialEntity;
+            public String getCoverurl() {
+                return coverurl;
+            }
+
+            public void setCoverurl(String coverurl) {
+                this.coverurl = coverurl;
+            }
+
+            public String getHeadurl() {
+                return headurl;
+            }
+
+            public void setHeadurl(String headurl) {
+                this.headurl = headurl;
+            }
+
+            public int getCommentNum() {
+                return commentNum;
+            }
+
+            public void setCommentNum(int commentNum) {
+                this.commentNum = commentNum;
+            }
+
+            public int getLikeNum() {
+                return likeNum;
+            }
+
+            public void setLikeNum(int likeNum) {
+                this.likeNum = likeNum;
+            }
+
+            public int getCollectNum() {
+                return collectNum;
+            }
+
+            public void setCollectNum(int collectNum) {
+                this.collectNum = collectNum;
+            }
+
+            public String getPlayurl() {
+                return playurl;
+            }
+
+            public void setPlayurl(String playurl) {
+                this.playurl = playurl;
+            }
+
+            public int getCollectState() {
+                return collectState;
+            }
+
+            public void setCollectState(int collectState) {
+                this.collectState = collectState;
+            }
+
+            public int getLikeState() {
+                return likeState;
+            }
+
+            public void setLikeState(int likeState) {
+                this.likeState = likeState;
+            }
         }
     }
 }

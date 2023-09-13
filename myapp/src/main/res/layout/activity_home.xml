@@ -15,38 +15,41 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/custompage" />
+            android:scaleType="centerCrop" />
 
     </FrameLayout>
 
 
+    <com.example.myapp.view.CustomViewPager
+        android:id="@+id/view_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_bar" />
+
     <LinearLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
-        <com.example.myapp.view.CustomViewPager
-            android:id="@+id/view_page"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#FFFFFF" />
+            android:background="#EDEDED" />
 
         <com.flyco.tablayout.CommonTabLayout
             android:id="@+id/common_tab"
             android:layout_width="match_parent"
-            android:layout_height="66dp"
-            android:background="@drawable/buttonshapewhitebg"
-            android:fontFamily="@font/calibri"
-            android:foreground="@drawable/sel_text_ripple_bg"
-            app:tl_textSelectColor="#96ffffff"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            app:tl_iconHeight="28dp"
+            app:tl_iconMargin="1dp"
+            app:tl_iconWidth="28dp"
+            app:tl_textSelectColor="@color/black"
             app:tl_textUnselectColor="@color/black"
-            app:tl_textsize="13sp" />
+            app:tl_textsize="12sp" />
     </LinearLayout>
 
 </RelativeLayout>

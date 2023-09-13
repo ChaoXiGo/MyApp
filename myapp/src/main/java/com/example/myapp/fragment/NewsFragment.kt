@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapp.MyApplication.TAG
 import com.example.myapp.activities.LoginActivity
+import com.example.myapp.activities.NewsActivity
+import com.example.myapp.activities.NewsActivity2
 import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.NewsAdapter
 import com.example.myapp.api.RetrofitApi
@@ -62,18 +64,20 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
         adapter = NewsAdapter(requireContext())
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
-                // 点击当前view的时候调用view的点击监听事件，事件中执行自定义的接口方法返回当前view中信息, 打开一个Activity
                 val newsEntity = obj as NewsEntity
-                Log.d(TAG, "onItemClick: ${newsEntity.authorName}")
-
-                val url = "http://192.168.31.32:8089/newsDetail?title=${newsEntity.authorName}"
-                val bundle = Bundle()
-                bundle.putString("url", url)
-                val intent = Intent(activity, WebActivity::class.java)
-                intent.putExtras(bundle)
-                startActivity(intent)
-
-                // startActivity(Intent(activity, WebActivity::class.java),Bundle(bundle))
+                if (newsEntity.type != 2){
+                    val bundle = Bundle()
+                    bundle.putSerializable("newsEntity", obj)
+                    val intent = Intent(activity, NewsActivity::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }else{
+                    val bundle = Bundle()
+                    bundle.putSerializable("newsEntity", obj)
+                    val intent = Intent(activity, NewsActivity2::class.java)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                }
             }
         })
         vb.refreshLayout.setOnRefreshListener {
@@ -106,7 +110,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
                 }
                 Log.d(TAG, "getMessageList: ${it.data}")
 
-                if (it.code == 1 ) {
+                if (it.code == 1) {
                     val list = it.data
                     if (list != null && list.size > 0) {
                         if (isRefresh) {
@@ -115,12 +119,12 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
                             data.addAll(list)
                         }
                         handler.sendEmptyMessage(0)
-                    }
-                } else {
-                    if (isRefresh) {
-                        showToast("暂时无数据")
                     } else {
-                        showToast("没有更多数据")
+                        if (isRefresh) {
+                            showToast("暂时无数据")
+                        } else {
+                            showToast("没有更多数据")
+                        }
                     }
                 }
             }, {

@@ -120,7 +120,21 @@ public class NewsResponse {
             this.newsThumbList = newsThumbList;
         }
 
-        public static class NewsThumbListBean {
+        @Override
+        public String toString() {
+            return "NewsEntity{" +
+                    "newsId=" + newsId +
+                    ", newsTitle='" + newsTitle + '\'' +
+                    ", authorName='" + authorName + '\'' +
+                    ", headerUrl='" + headerUrl + '\'' +
+                    ", commentCount=" + commentCount +
+                    ", releaseDate='" + releaseDate + '\'' +
+                    ", type=" + type +
+                    ", newsThumbList=" + newsThumbList +
+                    '}';
+        }
+
+        public static class NewsThumbListBean implements Serializable{
             @SerializedName("newsId")
             private int newsId;
             @SerializedName("thumbId")
@@ -150,6 +164,15 @@ public class NewsResponse {
 
             public void setThumbUrl(String thumbUrl) {
                 this.thumbUrl = thumbUrl;
+            }
+
+            @Override
+            public String toString() {
+                return "NewsThumbListBean{" +
+                        "newsId=" + newsId +
+                        ", thumbId=" + thumbId +
+                        ", thumbUrl='" + thumbUrl + '\'' +
+                        '}';
             }
         }
     }

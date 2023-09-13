@@ -38,7 +38,16 @@ public class VideoResponse {
         this.data = data;
     }
 
-    public static class DataBean {
+    @Override
+    public String toString() {
+        return "VideoResponse{" +
+                "code=" + code +
+                ", message=" + message +
+                ", data=" + data +
+                '}';
+    }
+
+    public static class DataBean implements Serializable{
         @SerializedName("records")
         private List<DataBean.VideoEntity> videoEntity;
         @SerializedName("total")
@@ -140,6 +149,22 @@ public class VideoResponse {
             this.pages = pages;
         }
 
+        @Override
+        public String toString() {
+            return "DataBean{" +
+                    "videoEntity=" + videoEntity +
+                    ", total=" + total +
+                    ", size=" + size +
+                    ", current=" + current +
+                    ", orders=" + orders +
+                    ", optimizeCountSql=" + optimizeCountSql +
+                    ", searchCount=" + searchCount +
+                    ", countId=" + countId +
+                    ", maxLimit=" + maxLimit +
+                    ", pages=" + pages +
+                    '}';
+        }
+
         public static class VideoEntity implements Serializable {
             @SerializedName("vid")
             private int vid;
@@ -159,6 +184,17 @@ public class VideoResponse {
             private int collectNum;
             @SerializedName("playurl")
             private String playurl;
+            @SerializedName("createTime")
+            private String createTime;
+
+            public String getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(String createTime) {
+                this.createTime = createTime;
+            }
+
             @SerializedName("collectState")
             private int collectState;
             @SerializedName("likeState")
@@ -250,6 +286,23 @@ public class VideoResponse {
 
             public void setLikeState(int likeState) {
                 this.likeState = likeState;
+            }
+
+            @Override
+            public String toString() {
+                return "VideoEntity{" +
+                        "vid=" + vid +
+                        ", vtitle='" + vtitle + '\'' +
+                        ", author='" + author + '\'' +
+                        ", coverurl='" + coverurl + '\'' +
+                        ", headurl='" + headurl + '\'' +
+                        ", commentNum=" + commentNum +
+                        ", likeNum=" + likeNum +
+                        ", collectNum=" + collectNum +
+                        ", playurl='" + playurl + '\'' +
+                        ", collectState=" + collectState +
+                        ", likeState=" + likeState +
+                        '}';
             }
         }
     }

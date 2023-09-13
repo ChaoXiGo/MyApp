@@ -3,10 +3,11 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="colorAccent">@color/black</item>
-
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <!-- 修改状态栏字体颜色为黑色 -->
+        <item name="android:windowLightStatusBar">true</item>
 <!--        <item name="android:windowFullscreen">true</item>-->
         <item name="android:windowContentOverlay">@null</item>
     </style>

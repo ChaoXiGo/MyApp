@@ -1,11 +1,16 @@
 package com.example.myapp.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapp.MyApplication.TAG
+import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.VideoAdapter
 import com.example.myapp.entity.VideoResponse.DataBean.VideoEntity
 import com.example.myapp.api.RetrofitApi
@@ -65,8 +70,18 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
         adapter = VideoAdapter(requireContext())
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
-                val entity = obj as VideoEntity
-                showToast("点击成功$entity")
+                val bundle = Bundle().apply {
+                    putSerializable("videoEntity", obj)
+                }
+                val intent = Intent(requireContext(), WebActivity::class.java).apply {
+                    putExtras(bundle)
+                }
+
+                /* val bundle = Bundle()
+                bundle.putSerializable("videoEntity", obj)
+                val intent = Intent(this@MyCollectActivity, WebActivity::class.java)
+                intent.putExtras(bundle) */
+                startActivity(intent)
             }
         })
 
@@ -112,21 +127,22 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
                 } else {
                     vb.refreshLayout.finishLoadMore(true)
                 }
-                if (it.code == 1){
+                Log.d(TAG, "getVideoList: $it")
+                if (it.code == 1) {
                     val list = it.data.videoEntity
-                    if (list!= null && list.size >0){
+                    if (list != null && list.size > 0) {
                         // 进行刷新动作界面为上， 显示第一页， 否则加载数据添加到集合
-                        if (isRefresh){
+                        if (isRefresh) {
                             data = list
-                        }else{
+                        } else {
                             data.addAll(list)
                         }
                         handler.sendEmptyMessage(0)
-                    }else{
+                    } else {
                         if (isRefresh) {
-                            showToastSync("暂时无数据")
+                            showToast("暂时无数据")
                         } else {
-                            showToastSync("没有更多数据")
+                            showToast("没有更多数据")
                         }
                     }
                 }
@@ -136,7 +152,7 @@ class VideoFragment : BaseFragment<FragmentVideoBinding>() {
                 } else {
                     vb.refreshLayout.finishLoadMore(true)
                 }
-                showToast("请求超时，检查网络连接或服务器断开连接")
+                showToast("检查网络连接或服务器断开连接")
             })
 
         /* OkApi.config("app/videolist/getlistbyid", params).getRequest(context,object :CallBack{

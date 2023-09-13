@@ -93,7 +93,25 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/img_cover"
+            android:id="@+id/img_cover1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/default_bg" />
+
+        <ImageView
+            android:id="@+id/img_cover2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/default_bg" />
+
+        <ImageView
+            android:id="@+id/img_cover3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -104,7 +122,6 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:layout_above="@id/comment"
             android:background="#EEEEEE" />
     </LinearLayout>
 
@@ -135,13 +152,6 @@
                     android:text="评论 134"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tv_like"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="456 赞" />
             </LinearLayout>
 
             <ListView

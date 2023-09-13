@@ -1,73 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
+
+   <!-- <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/custompage" />
+
+    </FrameLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/buttonshapewhitebg"
-        android:foreground="@drawable/sel_text_ripple_bg"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/calibri"
-            android:gravity="center"
-            android:text="主页"
-            android:textColor="#174C7A"
-            android:textSize="25sp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="5dp"
-            android:background="#dddddd" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/buttonshapewhitebg"
+            android:foreground="@drawable/sel_text_ripple_bg"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="13dp"
-                android:src="@mipmap/search" />
-
-            <EditText
-                android:id="@+id/et_search"
+           <!-- <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="11dp"
-                android:background="@null"
-                android:hint="搜索你喜欢的视频"
-                android:textColor="@color/black"
-                android:textColorHint="#737373"
-                android:textSize="15sp" />
+                android:layout_height="45dp"
+                android:background="@drawable/buttonshapewhitebg"
+                android:foreground="@drawable/sel_text_ripple_bg"
+                android:gravity="center"
+                android:text="主页"
+                android:textStyle="bold"
+                android:textColor="#174C7A"
+                android:textSize="25dp" />-->
+
+           <!-- <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="5dp"
+                android:background="#dddddd" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:background="@drawable/search_background"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="13dp"
+                    android:src="@mipmap/search" />
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="11dp"
+                    android:background="@null"
+                    android:hint="搜索你喜欢的内容"
+                    android:textColor="@color/black"
+                    android:textColorHint="#737373"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/slidingTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonshapewhitebg"
+                android:foreground="@drawable/sel_text_ripple_bg"
+                tl:tl_indicator_color="#2196F3"
+                tl:tl_indicator_corner_radius="1.5dp"
+                tl:tl_indicator_height="3dp"
+                tl:tl_indicator_width="17dp"
+                tl:tl_textSelectColor="#000000"
+                tl:tl_textUnselectColor="#555555"
+                tl:tl_textsize="16sp"
+                app:tl_textBold="SELECT" />
         </LinearLayout>
-
-        <com.flyco.tablayout.SlidingTabLayout
-            android:id="@+id/slidingTabLayout"
+        <com.example.myapp.view.CustomViewPager
+            android:id="@+id/vp1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            tl:tl_indicator_color="#fdf299"
-            tl:tl_indicator_corner_radius="1.5dp"
-            tl:tl_indicator_height="3dp"
-            tl:tl_indicator_width="17dp"
-            tl:tl_textSelectColor="#4CAF50"
-            tl:tl_textUnselectColor="#ffffff"
-            tl:tl_textsize="16sp" />
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
-
-    <com.example.myapp.view.CustomViewPager
-        android:id="@+id/vp1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-</LinearLayout>
+</RelativeLayout>

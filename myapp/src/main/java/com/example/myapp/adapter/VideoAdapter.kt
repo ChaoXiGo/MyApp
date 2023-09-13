@@ -15,6 +15,7 @@ import com.example.myapp.R
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.entity.VideoResponse.DataBean.VideoEntity
 import com.example.myapp.linstener.OnItemClickListener
+import com.example.myapp.view.CircleTransformation
 import com.squareup.picasso.Picasso
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -27,7 +28,6 @@ class VideoAdapter(context: Context) :
 
     lateinit var mOnItemClickListener: OnItemClickListener
 
-    private lateinit var videoEntity:VideoEntity
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         mOnItemClickListener = onItemClickListener
     }
@@ -47,7 +47,7 @@ class VideoAdapter(context: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        videoEntity = mInfo[position]
+        val videoEntity = mInfo[position]
         val vh = holder as ViewHolder
         vh.tvTitle.text = videoEntity.vtitle
         vh.tvAuthor.text = videoEntity.author
@@ -55,7 +55,7 @@ class VideoAdapter(context: Context) :
         vh.tvComment.text = videoEntity.commentNum.toString()
         vh.tvCollect.text = videoEntity.collectNum.toString()
 
-        Picasso.with(mContext).load(videoEntity.headurl).into(vh.img_header)
+        Picasso.with(mContext).load(videoEntity.headurl).transform(CircleTransformation()).into(vh.img_header)
         Picasso.with(mContext).load(videoEntity.coverurl).into(vh.img_cover)
 
         val playurl = videoEntity.playurl
@@ -112,9 +112,9 @@ class VideoAdapter(context: Context) :
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show()
+                    // Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show()
                 }, {
-                    Toast.makeText(mContext, "失败", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mContext, "网络连接超时", Toast.LENGTH_SHORT).show()
                 })
         }
 

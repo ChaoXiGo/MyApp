@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="263dp"
+    android:layout_height="wrap_content"
     android:background="#ffffff">
 
     <LinearLayout
+        android:id="@+id/item_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -29,7 +30,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -44,7 +45,7 @@
                 android:id="@+id/author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginStart="9dp"
                 android:text="游戏早知道 ."
                 android:textColor="#777777"
                 android:textSize="13sp" />
@@ -53,7 +54,7 @@
                 android:id="@+id/comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginStart="9dp"
                 android:text="1评论 ."
                 android:textColor="#777777"
                 android:textSize="13sp" />
@@ -68,10 +69,9 @@
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="#f1f1f1" />
+        android:layout_height="7dp"
+        android:layout_below="@+id/item_three"
+        android:background="#EDEDED" />
 </RelativeLayout>

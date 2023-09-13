@@ -36,8 +36,8 @@ interface ApiService {
         @Query("vid") vid: Int, @Query("type") type: Int,@Query("flag") flag: Boolean
     ): Observable<Unit>
 
-   /*  @GET("app/news/list")
+    @GET("app/getcollect")
     fun getCollectList(
         @Query("page") page: Int, @Query("limit") limit: Int
-    ) : Observable<NewsResponse> */
+    ) : Observable<VideoResponse>
 }

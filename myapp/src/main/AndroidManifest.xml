@@ -14,9 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.NewsActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NewsActivity"
+            android:exported="false" />
         <activity android:name=".activities.MyCollectActivity" />
         <activity android:name=".activities.WebActivity" />
-        <activity android:name=".activities.HomeActivity" />
+        <activity
+            android:name=".activities.HomeActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity

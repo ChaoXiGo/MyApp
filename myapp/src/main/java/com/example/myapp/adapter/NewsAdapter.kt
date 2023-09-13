@@ -8,18 +8,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
-import com.example.myapp.entity.NewsResponse
 import com.example.myapp.entity.NewsResponse.NewsEntity
 import com.example.myapp.linstener.OnItemClickListener
+import com.example.myapp.view.CircleTransformation
+import com.squareup.picasso.Picasso
 
 class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private lateinit var mInfo: List<NewsEntity>
 
-    // 声明接口
     lateinit var mOnItemClickListener: OnItemClickListener
 
-    // 接口赋值， 调用这个方法会执行接口中的onItemClick方法 从而拿到值
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
         mOnItemClickListener = onItemClickListener
     }
@@ -65,10 +64,10 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                 val vh = holder as ViewHolderOne
                 vh.title.text = newsEntity.newsTitle
                 vh.author.text = newsEntity.authorName
-                vh.comment.text = newsEntity.commentCount.toString() + "评论 ."
+                vh.comment.text = newsEntity.commentCount.toString() + "评论 "
                 vh.time.text = newsEntity.releaseDate
-                // Picasso.with(context).load(newsEntity.headerUrl).into(vh.header)
-                // Picasso.with(context).load(newsEntity.thumbEntities.toString()).into(vh.thumb)
+                Picasso.with(context).load(newsEntity.headerUrl).transform(CircleTransformation()).into(vh.header)
+                Picasso.with(context).load(newsEntity.newsThumbList[0].thumbUrl).into(vh.thumb)
 
                 // 将对象通过 fragment 中的 onClick 点击事件传递
                 vh.newsEntity = newsEntity
@@ -80,10 +79,10 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                 vh.author.text = newsEntity.authorName
                 vh.comment.text = newsEntity.commentCount.toString()
                 vh.time.text = newsEntity.releaseDate
-                // Picasso.with(context).load(newsEntity.headerUrl).into(vh.header)
-                // Picasso.with(context).load(newsEntity.imgList[0]).into(vh.pic1)
-                // Picasso.with(context).load(newsEntity.imgList[1]).into(vh.pic2)
-                // Picasso.with(context).load(newsEntity.imgList[2]).into(vh.pic3)
+                Picasso.with(context).load(newsEntity.headerUrl).transform(CircleTransformation()).into(vh.header)
+                Picasso.with(context).load(newsEntity.newsThumbList[0].thumbUrl).into(vh.pic1)
+                Picasso.with(context).load(newsEntity.newsThumbList[1].thumbUrl).into(vh.pic2)
+                Picasso.with(context).load(newsEntity.newsThumbList[2].thumbUrl).into(vh.pic3)
 
                 // 将对象通过 fragment 中的 onClick 点击事件传递
                 vh.newsEntity = newsEntity
@@ -93,10 +92,10 @@ class NewsAdapter(val context: Context) : RecyclerView.Adapter<RecyclerView.View
                 val vh = holder as ViewHolderThree
                 vh.title.text = newsEntity.newsTitle
                 vh.author.text = newsEntity.authorName
-                vh.comment.text = newsEntity.commentCount.toString() + "评论 ."
+                vh.comment.text = newsEntity.commentCount.toString() + "评论 "
                 vh.time.text = newsEntity.releaseDate
-                // Picasso.with(context).load(newsEntity.headerUrl).into(vh.header)
-                // Picasso.with(context).load(newsEntity.thumbEntities.toString()).into(vh.thumb)
+                Picasso.with(context).load(newsEntity.headerUrl).into(vh.header)
+                Picasso.with(context).load(newsEntity.newsThumbList[0].thumbUrl).into(vh.thumb)
 
                 // 将对象通过 fragment 中的 onClick 点击事件传递
                 vh.newsEntity = newsEntity

@@ -13,12 +13,10 @@ import com.example.myapp.MyApplication.TAG
 import com.example.myapp.activities.LoginActivity
 import com.example.myapp.activities.NewsActivity
 import com.example.myapp.activities.NewsActivity2
-import com.example.myapp.activities.WebActivity
 import com.example.myapp.adapter.NewsAdapter
 import com.example.myapp.api.RetrofitApi
 import com.example.myapp.databinding.FragmentNewsBinding
 import com.example.myapp.entity.NewsResponse.NewsEntity
-
 import com.example.myapp.linstener.OnItemClickListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -28,13 +26,12 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
     companion object {
         @JvmStatic
         fun newInstance() =
-            NewsFragment().apply {
-
-            }
+            NewsFragment().apply {}
     }
 
     @SuppressLint("HandlerLeak")
     val handler: Handler = object : Handler() {
+        @SuppressLint("NotifyDataSetChanged")
         override fun handleMessage(msg: Message) {
             super.handleMessage(msg)
             if (msg.what == 0) {
@@ -54,7 +51,7 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
     }
 
     lateinit var adapter: NewsAdapter
-    var pageNum = 1
+    private var pageNum = 1
     override fun initData() {
         // 1`初始化recycleView
         val layoutManager = LinearLayoutManager(context)
@@ -65,13 +62,13 @@ class NewsFragment : BaseFragment<FragmentNewsBinding>() {
         adapter.setOnItemClickListener(object : OnItemClickListener {
             override fun onItemClick(obj: Serializable) {
                 val newsEntity = obj as NewsEntity
-                if (newsEntity.type != 2){
+                if (newsEntity.type != 2) {
                     val bundle = Bundle()
                     bundle.putSerializable("newsEntity", obj)
                     val intent = Intent(activity, NewsActivity::class.java)
                     intent.putExtras(bundle)
                     startActivity(intent)
-                }else{
+                } else {
                     val bundle = Bundle()
                     bundle.putSerializable("newsEntity", obj)
                     val intent = Intent(activity, NewsActivity2::class.java)

@@ -101,6 +101,14 @@
             android:scaleType="fitXY"
             android:src="@mipmap/default_bg" />
 
+       <!-- <com.github.chrisbanes.photoview.PhotoView
+            android:id="@+id/photoView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+        android:contentDescription="Zoomable Image"/>-->
+
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"

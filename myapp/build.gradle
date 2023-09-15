@@ -104,7 +104,24 @@ dependencies {
 
     implementation 'com.amap.api:3dmap:5.0.0'
     implementation 'com.amap.api:location:3.3.0'
-// https://mvnrepository.com/artifact/com.xw.repo/bubbleseekbar
-    // https://mvnrepository.com/artifact/com.xw.repo/bubbleseekbar
-//    implementation("com.xw.repo:bubbleseekbar:3.18")
+
+    // 必选，内部默认使用系统mediaplayer进行解码
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-java:3.3.7'
+
+    // 可选，包含StandardVideoController的实现
+    implementation 'xyz.doikki.android.dkplayer:dkplayer-ui:3.3.7'
+
+    // 可选，使用exoplayer进行解码
+    implementation 'xyz.doikki.android.dkplayer:player-exo:3.3.7'
+
+    // 可选，使用ijkplayer进行解码
+    implementation 'xyz.doikki.android.dkplayer:player-ijk:3.3.7'
+
+    // 可选，如需要缓存或者抖音预加载功能请引入此库
+    implementation 'xyz.doikki.android.dkplayer:videocache:3.3.7'
+
+// https://mvnrepository.com/artifact/com.github.chrisbanes/PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+
+    implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.2.7'
 }
